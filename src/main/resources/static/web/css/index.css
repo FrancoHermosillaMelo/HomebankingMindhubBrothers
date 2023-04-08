@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@700&family=Poppins:wght@400;500;600;700&display=swap');
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
+}
+.main-color {
+	height: 100vh;
+	background-color: #161a1e;
+}
+.div-conteiner {
+	height: 100vh;
+}
+.img-index {
+	width: 10em;
+	height: 10em;
+	position: absolute;
+	top: 160px;
+}
+.form {
+	height: 100vh;
+	background-color: #161a1e;
+	backdrop-filter: blur(20px);
+	width: 500px;
+	position: relative;
+	/* border-radius: 10px; */
+	box-shadow: 1px 1px 30px 1px #e7d49e;
+}
+.form-index {
+	height: 100vh;
+}
+.form-index > div {
+	width: 350px;
+}
+.form-control {
+	box-shadow: -1px 1px 1px 1px rgba(231, 212, 158, 0.69) !important;
+}
+.form-label {
+	background-image: linear-gradient(90deg, rgba(216, 174, 94, 1) 35%, rgba(231, 212, 158, 1) 100%);
+	background-size: 100%;
+	background-repeat: repeat;
+	background-clip: text;
+	-webkit-background-clip: text;
+	-moz-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	-moz-text-fill-color: transparent;
+	font-size: 20px;
+}
+ion-icon {
+	color: #e7d49e;
+	font-size: 40px;
+}
+::placeholder {
+	color: rgba(128, 128, 128, 0.762) !important;
+}
+.input-box {
+	outline: none !important;
+	border: none !important;
+}
+.btn {
+	background-image: linear-gradient(90deg, rgba(216, 174, 94, 1) 35%, rgba(231, 212, 158, 1) 100%);
+	background-size: 100%;
+	background-repeat: repeat;
+	border: white;
+	font-size: 24px;
+}
+.form-check-input {
+	box-shadow: none !important;
+	border: white !important;
+}
+.form-check-input:checked {
+	background-color: #9d906c !important;
+}
+@media (min-width: 770px) and (max-width: 1380px) {
+	.img-index {
+		top: 160px;
+	}
+}
+@media (min-width: 319px) and (max-width: 1000px) {
+	video {
+		display: none;
+	}
+	.div-conteiner {
+		justify-content: center !important;
+	}
+	.img-index {
+		top: 80px;
+	}
+}

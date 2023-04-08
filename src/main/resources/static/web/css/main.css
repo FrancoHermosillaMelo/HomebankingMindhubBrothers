@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@700&family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
+}
+a {
+	text-decoration: none !important;
+}
+svg {
+	color: white;
+}
+main {
+	min-height: 100vh;
+	background-image: url(../img/fondo.jpg);
+	background-position: center;
+	background-size: cover;
+}
+form {
+	background-color: rgba(0, 0, 0, 0.67);
+	backdrop-filter: blur(50px);
+	height: 30em;
+	width: 80vh;
+	border-radius: 50px;
+}
+.div-form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 450px;
+	margin: 35px auto;
+	height: 24em;
+}
+.preh3 {
+	width: 50em;
+	padding: 15px;
+}
+#pre {
+	height: 40em !important;
+	background-color: rgba(0, 0, 0, 0.67);
+	backdrop-filter: blur(50px);
+	overflow-x: hidden;
+	border-radius: 20px;
+}
+.table {
+	width: 50%;
+	margin: auto;
+}
+
+@media (min-width: 320px) and (max-width: 470px) {
+	form {
+		border-radius: 0px;
+	}
+	.div-form {
+		width: 100%;
+		padding: 15px;
+	}
+	table {
+		margin: 0;
+	}
+}

@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@700&family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
+}
+header {
+	background-color: transparent !important;
+}
+body {
+	background-color: #161a1e !important;
+}
+.img-header {
+	width: 5em;
+	height: 5em;
+}
+.nav-link {
+	font-size: 20px;
+	font-weight: 500;
+	color: white !important;
+}
+.active {
+	border-bottom: 2px solid #e7d49e;
+	max-width: fit-content;
+}
+.navbar-toggler {
+	background-color: #e7d49e;
+	border: 1px solid white;
+	box-shadow: none !important;
+}
+.exit {
+	font-size: 30px;
+	color: #e7d49e !important;
+	cursor: pointer;
+}
+.encabezado {
+	height: 10em;
+	background-color: rgb(24, 22, 20);
+	border-top: 1px solid grey;
+	border-bottom: 1px solid grey;
+}
+.encabezado > h1 {
+	height: 4em;
+	margin: 0 !important;
+	color: white;
+}
+.text-welcome {
+	color: #e7d49e !important;
+}
+.text-main {
+	font-size: 3em;
+	padding-bottom: 10px;
+	border-bottom: 2px solid #e7d49e;
+	max-width: fit-content;
+	margin: auto;
+}
+.div-main {
+	width: 30em;
+	height: 30em;
+	background-color: white;
+	border-radius: 20px;
+	box-shadow: 1px 1px 20px 5px #e7d49e;
+}
+.div-account {
+	padding-bottom: 8em !important;
+}
+.h3-account {
+	font-size: 4em;
+	text-align: center;
+	padding-top: 15px;
+	border-bottom: 5px solid #e7d49e;
+	max-width: fit-content;
+	margin-left: auto;
+	margin-right: auto;
+}
+.h5-account {
+	max-width: fit-content;
+	margin: auto;
+	padding-top: 10px;
+}
+.span-vue {
+	color: grey;
+	font-size: 1.5em;
+}
+.icon-debit {
+	font-size: 50px;
+	margin-top: 0px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.a-trans {
+	color: black;
+}
+.footer {
+	background-color: #161a1e;
+	height: 4em;
+	border-top: 1px solid grey;
+}
+.twitter {
+	font-size: 40px;
+	color: gray;
+	cursor: pointer;
+}
+.facebook {
+	font-size: 40px;
+	color: gray;
+	cursor: pointer;
+}
+.twitter:hover {
+	color: aqua;
+}
+.facebook:hover {
+	color: rgb(0, 106, 255);
+}
+.text-footer {
+	color: gray;
+}
+.text-footer > span {
+	font-weight: bold;
+	color: #e7d49e;
+}
+
+/*---------------------------TRANSACTIONS----------------------------------------*/
+
+.main-trans {
+	min-height: 82.8vh;
+}
+.div-trans {
+	min-height: 38em;
+}
+.text-trans {
+	font-weight: 400;
+	font-size: 20px;
+}
+.DEBIT {
+	color: red !important;
+}
+.CREDIT {
+	color: green !important;
+}
+.table {
+	box-shadow: 1px 2px 10px 2px #e7d49e;
+}
+@media (min-width: 319px) and (max-width: 1000px) {
+	.encabezado > h1 {
+		height: 5.2em;
+		font-size: 2em;
+	}
+	.nav-link {
+		margin: auto;
+		max-width: fit-content;
+	}
+	.exit1 {
+		padding: 0 !important;
+		padding-top: 15px !important;
+	}
+	.footer {
+		padding-top: 20px;
+		justify-content: center !important;
+	}
+	.div-redes {
+		padding: 0 !important;
+		padding-bottom: 15px !important;
+	}
+	.text-footer {
+		padding: 0 !important;
+		text-align: center;
+	}
+}
