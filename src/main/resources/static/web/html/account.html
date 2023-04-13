@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>HOMEBANKING | ACCOUNT</title>
+		<title>HOMEBANKING | TRANSACTIONS</title>
 		<link
 			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css"
 			rel="stylesheet"
@@ -33,7 +33,7 @@
 					<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
 						<ul class="navbar-nav">
 							<li class="nav-item">
-								<a class="nav-link active text-center" aria-current="page" href="#">Home</a>
+								<a class="nav-link active text-center" aria-current="page" href="./accounts.html">Home</a>
 							</li>
 							<li class="ps-5 exit1">
 								<a class="nav-link" href="../index.html"><ion-icon class="exit" name="exit-outline"></ion-icon></a>
@@ -43,27 +43,29 @@
 				</div>
 			</nav>
 		</header>
-		<main id="app">
+		<main class="main-trans" id="app">
 			<div class="encabezado">
-				<h1 class="d-flex justify-content-center align-items-center">Welcome <span class="ps-3 text-welcome">{{datos.firstName}}!</span></h1>
+				<h1 class="d-flex justify-content-center align-items-center">TRANSACTIONS</h1>
 			</div>
-			<h2 class="text-center pt-5 text-light text-main">ACCOUNTS</h2>
-			<div class="pt-5 d-flex justify-content-around flex-wrap div-account gap-5">
-				<div class="div-main d-flex flex-column justify-content-evenly text-center" v-for="dato of datos.account">
-					<h3 class="h3-account text-center">{{dato.number}}</h3>
-					<div>
-						<h5 class="h5-account text-start">
-							<span class="pe-2">Create</span>
-						</h5>
-						<span class="span-vue">{{dato.creationDate.slice(0,10)}} at {{dato.creationDate.slice(11,16)}}</span>
-						<h5 class="h5-account text-start"><span class="pe-2">Balance</span></h5>
-						<span class="span-vue">{{dato.balance.toLocaleString()}}$</span>
-					</div>
-					<div>
-						<h4>TRANSACTIONS</h4>
-						<a :href="'./transaction.html?id=' + dato.id" class="a-trans"><ion-icon class="icon-debit" name="card-outline"></ion-icon></a>
-					</div>
-				</div>
+			<div class="div-trans d-flex justify-content-center align-items-center">
+				<table class="table container">
+					<thead class="table-light">
+						<tr>
+							<td class="text-trans">Date</td>
+							<td class="text-trans">Amount</td>
+							<td class="text-trans">Description</td>
+							<td class="text-trans">Type</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr :class="dato.type" v-for="dato of transactions">
+							<td class="text-trans">{{dato.date.slice(0,10)}} | {{dato.date.slice(11,16)}}</td>
+							<td class="text-trans">{{dato.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}$</td>
+							<td class="text-trans">{{dato.description}}</td>
+							<td class="text-trans">{{dato.type}}</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</main>
 		<footer class="d-flex justify-content-between align-items-center flex-wrap footer">
