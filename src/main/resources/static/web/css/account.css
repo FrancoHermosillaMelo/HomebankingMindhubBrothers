@@ -18,12 +18,18 @@ body {
 }
 .nav-link {
 	font-size: 20px;
-	font-weight: 500;
+	font-weight: 400;
 	color: white !important;
 }
 .active {
 	border-bottom: 2px solid #e7d49e;
 	max-width: fit-content;
+	height: 45px;
+}
+.nav-link:hover {
+	border-bottom: 2px solid #e7d49e;
+	max-width: fit-content;
+	height: 45px;
 }
 .navbar-toggler {
 	background-color: #e7d49e;
@@ -33,7 +39,6 @@ body {
 .exit {
 	font-size: 30px;
 	color: #e7d49e !important;
-	cursor: pointer;
 }
 .encabezado {
 	height: 10em;
@@ -146,14 +151,25 @@ body {
 .table {
 	box-shadow: 1px 2px 10px 2px #e7d49e;
 }
+
 @media (min-width: 319px) and (max-width: 1000px) {
 	.encabezado > h1 {
 		height: 5.2em;
 		font-size: 2em;
 	}
 	.nav-link {
+		margin: auto !important;
+		max-width: fit-content !important;
+	}
+	.nav-item {
+		padding: 0 !important;
+	}
+	.nav-card {
 		margin: auto;
 		max-width: fit-content;
+	}
+	.active {
+		min-height: 40px !important;
 	}
 	.exit1 {
 		padding: 0 !important;

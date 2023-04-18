@@ -78,14 +78,4 @@ public class Loan {
         this.clientloans = clientloans;
     }
 
-    @Override
-    public String toString() {
-        return "Loan{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", maxAmount=" + maxAmount +
-                ", payments=" + payments +
-                '}';
-    }
-
 }

@@ -76,15 +76,4 @@ public class Account {
         return transactions;
     }
 
-    @Override
-    public String toString() {
-        return "Account{" +
-                "id=" + id +
-                ", number='" + number + '\'' +
-                ", creationDate=" + creationDate +
-                ", balance=" + balance +
-                ", client=" + client +
-                ", transactions=" + transactions +
-                '}';
-    }
 }
