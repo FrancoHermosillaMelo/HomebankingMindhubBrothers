@@ -20,6 +20,7 @@
 				<nav class="navbar navbar-expand-lg">
 					<div class="container-fluid ps-5 pe-5">
 						<img src="../img/logo.png" alt="logo" class="img-header" />
+						<span class="text-light fs-5 txt-header-span">MINDHUB BROTHERS</span>
 						<button
 							class="navbar-toggler"
 							type="button"
@@ -34,13 +35,13 @@
 						<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
 							<ul class="navbar-nav">
 								<li class="nav-item">
-									<a class="nav-link active text-center" aria-current="page" href="#">Home</a>
+									<a class="nav-link hovers active text-center" aria-current="page" href="#">Home</a>
 								</li>
 								<li class="nav-item ps-2">
-									<a class="nav-link text-center" aria-current="page" :href="'./cards.html?id=' + datos.id">MyCards</a>
+									<a class="nav-link hovers text-center" aria-current="page" href="./cards.html">MyCards</a>
 								</li>
 								<li class="ps-2 exit1">
-									<a class="nav-link" href="../index.html"><ion-icon class="exit" name="exit-outline"></ion-icon></a>
+									<a @click.prevent="logout" class="nav-link logout"><ion-icon class="exit" name="exit-outline"></ion-icon></a>
 								</li>
 							</ul>
 						</div>
@@ -57,20 +58,21 @@
 						<h3 class="h3-account text-center">{{dato.number}}</h3>
 						<div>
 							<h5 class="h5-account text-start">
-								<span class="pe-2">Create</span>
+								<span class="pe-2">Creation Day</span>
 							</h5>
 							<span class="span-vue">{{dato.creationDate.slice(0,10)}} at {{dato.creationDate.slice(11,16)}}</span>
 							<h5 class="h5-account text-start"><span class="pe-2">Balance</span></h5>
-							<span class="span-vue">{{dato.balance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}$</span>
+							<span class="span-vue">{{dato.balance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}} U$S</span>
 						</div>
 						<div>
-							<h4>TRANSACTIONS</h4>
-							<a :href="'./account.html?id=' + dato.id" class="a-trans"><ion-icon class="icon-debit" name="card-outline"></ion-icon></a>
+							<h4><span class="span">-</span>TRANSACTIONS<span class="span">-</span></h4>
+
+							<a :href="'./account.html?id=' + dato.id" class="a-trans"><ion-icon class="icon-debit" name="swap-vertical-outline"></ion-icon></a>
 						</div>
 					</div>
 				</div>
 				<h2 class="text-main pt-3 text-light text-center">LOANS</h2>
-				<div class="pt-5 pb-5 d-flex justify-content-center align-items-center" v-if="loans.length">
+				<div class="pt-5 pb-5 d-flex justify-content-center align-items-center contenedor" v-if="loans.length">
 					<table class="table container">
 						<thead class="table-light">
 							<tr>
@@ -82,7 +84,7 @@
 						<tbody>
 							<tr v-for="dato of loans">
 								<td class="text-light text-center">{{dato.name}}</td>
-								<td class="text-light text-center">{{dato.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}$</td>
+								<td class="text-light text-center">{{dato.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}} U$S</td>
 								<td class="text-light text-center">{{dato.payments}}</td>
 							</tr>
 						</tbody>
@@ -95,10 +97,19 @@
 			</main>
 			<footer class="d-flex justify-content-between align-items-center flex-wrap footer">
 				<div class="d-flex justify-content-evenly ps-5 div-redes">
-					<ion-icon class="twitter pe-5" name="logo-twitter"></ion-icon>
-					<ion-icon class="facebook" name="logo-facebook"></ion-icon>
+					<a href="https://twitter.com/?lang=es" target="_blank"><ion-icon class="twitter pe-5" name="logo-twitter"></ion-icon></a>
+					<a
+						href="https://www.facebook.com/?stype=lo&jlou=AfffVveciDyf5KfxOjIp2ZfxOJrcoWkofVg7BatuPUqbUTBRc5Z_Zc7wD2r2LhQzpqh7D0Ey3KVkNDMMdjzbtt_Z7lFjaTbRjXujd9VM8l2Zzw&smuh=45536&lh=Ac_fNpk9LXOq1f7U"
+						target="
+					"
+						><ion-icon class="facebook" name="logo-facebook"></ion-icon
+					></a>
 				</div>
-				<h4 class="pe-5 text-footer">Franco Hermosilla Melo <span>Cohort 44</span></h4>
+				<h4 class="pe-5 text-footer">
+					<a class="linkedin" href="https://www.linkedin.com/in/franco-agustin-hermosilla-melo/" target="_blank"
+						>Franco Hermosilla Melo <span>Cohort 44</span></a
+					>
+				</h4>
 			</footer>
 		</div>
 		<script
@@ -109,6 +120,7 @@
 		<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 		<script src="../js/accounts.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 		<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 	</body>

@@ -15,66 +15,80 @@
 		<link rel="stylesheet" href="../css/account.css" />
 	</head>
 	<body>
-		<header>
-			<nav class="navbar navbar-expand-lg">
-				<div class="container-fluid ps-5 pe-5">
-					<img src="../img/logo.png" alt="logo" class="img-header" />
-					<button
-						class="navbar-toggler"
-						type="button"
-						data-bs-toggle="collapse"
-						data-bs-target="#navbarNav"
-						aria-controls="navbarNav"
-						aria-expanded="false"
-						aria-label="Toggle navigation"
-					>
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-						<ul class="navbar-nav">
-							<li class="nav-item">
-								<a class="nav-link active text-center" aria-current="page" href="./accounts.html">Home</a>
-							</li>
-							<li class="ps-5 exit1">
-								<a class="nav-link" href="../index.html"><ion-icon class="exit" name="exit-outline"></ion-icon></a>
-							</li>
-						</ul>
+		<div id="app">
+			<header>
+				<nav class="navbar navbar-expand-lg">
+					<div class="container-fluid ps-5 pe-5">
+						<img src="../img/logo.png" alt="logo" class="img-header" />
+						<button
+							class="navbar-toggler"
+							type="button"
+							data-bs-toggle="collapse"
+							data-bs-target="#navbarNav"
+							aria-controls="navbarNav"
+							aria-expanded="false"
+							aria-label="Toggle navigation"
+						>
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+							<ul class="navbar-nav">
+								<li class="nav-item">
+									<a class="nav-link active text-center" aria-current="page" href="./accounts.html">Home</a>
+								</li>
+								<li class="nav-item ps-2">
+									<a class="nav-link hovers text-center" aria-current="page" href="./cards.html">MyCards</a>
+								</li>
+								<li class="ps-2 exit1">
+									<a @click.prevent="logout" class="nav-link logout"><ion-icon class="exit" name="exit-outline"></ion-icon></a>
+								</li>
+							</ul>
+						</div>
 					</div>
+				</nav>
+			</header>
+			<main class="main-trans">
+				<div class="encabezado">
+					<h1 class="d-flex justify-content-center align-items-center">TRANSACTIONS</h1>
 				</div>
-			</nav>
-		</header>
-		<main class="main-trans" id="app">
-			<div class="encabezado">
-				<h1 class="d-flex justify-content-center align-items-center">TRANSACTIONS</h1>
-			</div>
-			<div class="div-trans d-flex justify-content-center align-items-center">
-				<table class="table container">
-					<thead class="table-light">
-						<tr>
-							<td class="text-trans">Date</td>
-							<td class="text-trans">Amount</td>
-							<td class="text-trans">Description</td>
-							<td class="text-trans">Type</td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr :class="dato.type" v-for="dato of transactions">
-							<td class="text-trans">{{dato.date.slice(0,10)}} | {{dato.date.slice(11,16)}}</td>
-							<td class="text-trans">{{dato.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}$</td>
-							<td class="text-trans">{{dato.description}}</td>
-							<td class="text-trans">{{dato.type}}</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</main>
-		<footer class="d-flex justify-content-between align-items-center flex-wrap footer">
-			<div class="d-flex justify-content-evenly ps-5 div-redes">
-				<ion-icon class="twitter pe-5" name="logo-twitter"></ion-icon>
-				<ion-icon class="facebook" name="logo-facebook"></ion-icon>
-			</div>
-			<h4 class="pe-5 text-footer">Franco Hermosilla Melo <span>Cohort 44</span></h4>
-		</footer>
+				<div class="div-trans d-flex justify-content-center align-items-center">
+					<table class="table container">
+						<thead class="table-light">
+							<tr>
+								<td class="text-trans">Date</td>
+								<td class="text-trans">Amount</td>
+								<td class="text-trans">Description</td>
+								<td class="text-trans">Type</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr :class="dato.type" v-for="dato of transactions">
+								<td class="text-trans">{{dato.date.slice(0,10)}} | {{dato.date.slice(11,16)}}</td>
+								<td class="text-trans">{{dato.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}$</td>
+								<td class="text-trans">{{dato.description}}</td>
+								<td class="text-trans">{{dato.type}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</main>
+			<footer class="d-flex justify-content-between align-items-center flex-wrap footer">
+				<div class="d-flex justify-content-evenly ps-5 div-redes">
+					<a href="https://twitter.com/?lang=es" target="_blank"><ion-icon class="twitter pe-5" name="logo-twitter"></ion-icon></a>
+					<a
+						href="https://www.facebook.com/?stype=lo&jlou=AfffVveciDyf5KfxOjIp2ZfxOJrcoWkofVg7BatuPUqbUTBRc5Z_Zc7wD2r2LhQzpqh7D0Ey3KVkNDMMdjzbtt_Z7lFjaTbRjXujd9VM8l2Zzw&smuh=45536&lh=Ac_fNpk9LXOq1f7U"
+						target="
+				"
+						><ion-icon class="facebook" name="logo-facebook"></ion-icon
+					></a>
+				</div>
+				<h4 class="pe-5 text-footer">
+					<a class="linkedin" href="https://www.linkedin.com/in/franco-agustin-hermosilla-melo/" target="_blank"
+						>Franco Hermosilla Melo <span>Cohort 44</span></a
+					>
+				</h4>
+			</footer>
+		</div>
 		<script
 			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
 			integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
@@ -83,6 +97,7 @@
 		<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 		<script src="../js/account.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 		<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 	</body>

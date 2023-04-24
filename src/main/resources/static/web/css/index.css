@@ -1,22 +1,46 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@700&family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Forum&display=swap');
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 	font-family: 'Poppins', sans-serif;
 }
+body::-webkit-scrollbar {
+	width: 10px;
+	background: #161a1e;
+}
+body::-webkit-scrollbar-thumb {
+	background: #e7d49e;
+	border-radius: 10px;
+	border-right: 2px solid #161a1e;
+}
 .main-color {
 	height: 100vh;
 	background-color: #161a1e;
 }
+.txt-h5 {
+	position: absolute;
+	top: 510px;
+	right: 1000px;
+	font-family: 'Forum', cursive;
+	font-size: 1.5em;
+	font-weight: 100;
+	letter-spacing: 0.1em;
+}
+.span-txt {
+	color: #e7d49e;
+	text-decoration: none;
+}
+.span-txt:hover {
+	text-decoration: underline;
+}
 .div-conteiner {
 	height: 100vh;
+	box-shadow: 0px 20px 20px 20px #161a1e;
 }
 .img-index {
 	width: 10em;
-	height: 10em;
-	position: absolute;
-	top: 160px;
 }
 .form {
 	height: 100vh;
@@ -24,11 +48,19 @@
 	backdrop-filter: blur(20px);
 	width: 500px;
 	position: relative;
-	/* border-radius: 10px; */
-	box-shadow: 1px 1px 30px 1px #e7d49e;
+	box-shadow: 1px -43px 30px 1px #e7d49e;
+}
+input:focus {
+	border: none;
 }
 .form-index {
 	height: 100vh;
+}
+.form-login {
+	display: none !important;
+}
+.form-register {
+	display: none !important;
 }
 .form-index > div {
 	width: 350px;
@@ -72,11 +104,69 @@ ion-icon {
 .form-check-input:checked {
 	background-color: #9d906c !important;
 }
+.div-content-ini {
+	margin-top: 100px;
+	margin-bottom: 100px;
+}
+.img-index2 {
+	width: 50em;
+	height: 30em;
+	object-fit: cover;
+	border-radius: 10px;
+	box-shadow: 2px 8px 16px 3px #161a1e;
+}
+.content-p {
+	width: 30em;
+	font-size: 24px;
+}
+.span-p {
+	background-color: #decb9988;
+	color: #161a1e;
+	font-weight: bold;
+	font-style: italic;
+}
+.card {
+	width: 18rem;
+	height: 25rem !important;
+	border-radius: 50px 5px 50px 5px !important;
+}
+.card:hover {
+	box-shadow: -1px 1px 10px 4px rgba(231, 212, 158, 0.69) !important;
+}
+.div-card {
+	height: 28em;
+	background-color: #161a1e;
+	box-shadow: 0px -6px 7px 5px #161a1e !important;
+}
+.card-img-top {
+	height: 15em;
+	object-fit: cover;
+	border-radius: 50px 0px 0px 0px !important;
+}
+
+/*-----------------------------ALERTAS--------------------------------------*/
+.swal2-confirm {
+	background-color: #e7d49e !important;
+}
+.swal2-styled.swal2-confirm:focus {
+	box-shadow: none !important;
+}
+.swal2-popup {
+	box-shadow: 0px 1px 8px 1px #e7d49e !important;
+	color: white !important;
+	background: #161a1e52 !important;
+	backdrop-filter: blur(2px) !important;
+}
+body.swal2-shown > [aria-hidden='true'] {
+	transition: 0.1s filter;
+	filter: blur(10px);
+}
 @media (min-width: 770px) and (max-width: 1380px) {
 	.img-index {
-		top: 160px;
+		display: none;
 	}
 }
+
 @media (min-width: 319px) and (max-width: 1000px) {
 	video {
 		display: none;
@@ -85,6 +175,6 @@ ion-icon {
 		justify-content: center !important;
 	}
 	.img-index {
-		top: 80px;
+		display: none;
 	}
 }
