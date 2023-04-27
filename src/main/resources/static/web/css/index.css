@@ -105,19 +105,21 @@ ion-icon {
 	background-color: #9d906c !important;
 }
 .div-content-ini {
-	margin-top: 100px;
-	margin-bottom: 100px;
+	margin-top: 40px;
+	margin-bottom: 20px;
 }
 .img-index2 {
-	width: 50em;
+	width: 100%;
 	height: 30em;
 	object-fit: cover;
-	border-radius: 10px;
 	box-shadow: 2px 8px 16px 3px #161a1e;
 }
 .content-p {
 	width: 30em;
 	font-size: 24px;
+	cursor: default;
+	position: absolute;
+	right: 0px;
 }
 .span-p {
 	background-color: #decb9988;
@@ -129,19 +131,26 @@ ion-icon {
 	width: 18rem;
 	height: 25rem !important;
 	border-radius: 50px 5px 50px 5px !important;
+	box-shadow: -1px 1px 10px 4px rgba(231, 212, 158, 0.69) !important;
 }
 .card:hover {
 	box-shadow: -1px 1px 10px 4px rgba(231, 212, 158, 0.69) !important;
 }
+.card-body > h5 {
+	cursor: default;
+}
+.card-body > p {
+	cursor: default;
+}
 .div-card {
-	height: 28em;
+	min-height: 28em;
 	background-color: #161a1e;
 	box-shadow: 0px -6px 7px 5px #161a1e !important;
 }
 .card-img-top {
 	height: 15em;
 	object-fit: cover;
-	border-radius: 50px 0px 0px 0px !important;
+	border-radius: 50px 0px 40px 40px !important;
 }
 
 /*-----------------------------ALERTAS--------------------------------------*/

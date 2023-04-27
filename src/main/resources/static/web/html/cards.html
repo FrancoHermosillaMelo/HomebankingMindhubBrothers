@@ -53,12 +53,15 @@
 				<div class="encabezado">
 					<h1 class="d-flex justify-content-center align-items-center">CARDS</h1>
 				</div>
-				<div class="pt d-flex justify-content-evenly align-items-center flex-wrap">
+				<template v-if="cards.length !== 6">
+					<a href="./create-cards.html" class="d-flex justify-content-center m-auto mt-4 btn-cards">ADD CARDS</a>
+				</template>
+				<div class="pt d-flex justify-content-evenly align-items-start flex-wrap">
 					<div class="center">
-						<h2 class="text-center text-light text-card">DEBIT</h2>
+						<h2 class="text-center text-light text-card mb-3">DEBIT</h2>
 						<template v-if="cardsDebit.length" v-for="card of cardsDebit">
 							<div class="card">
-								<div class="flip pt-5">
+								<div class="flip">
 									<div :class="card.color" class="front">
 										<div class="strip-bottom"></div>
 										<div class="strip-top"></div>
@@ -123,10 +126,10 @@
 					</div>
 
 					<div class="center">
-						<h2 class="text-center text-light text-card">CREDIT</h2>
+						<h2 class="text-center text-light text-card mb-3">CREDIT</h2>
 						<template v-if="cardsCredit.length" v-for="card of cardsCredit">
 							<div class="card">
-								<div class="flip pt-5">
+								<div class="flip">
 									<div :class="card.color" class="front">
 										<div class="strip-bottom"></div>
 										<div class="strip-top"></div>

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 @RestController
@@ -26,7 +25,7 @@ public class ClientController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public String randomNumber(){
+    private String randomNumber(){
         String randomNumber;
         do {
             int number = (int) (Math.random() * 999999 + 100000);
@@ -45,6 +44,7 @@ public class ClientController {
     }
 
     @RequestMapping(path = "/api/clients", method = RequestMethod.POST)
+//    @PostMapping(path = "/api/clients")
 
     public ResponseEntity<Object> register(
 
@@ -52,17 +52,34 @@ public class ClientController {
 
             @RequestParam String email, @RequestParam String password) {
 
-        if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty()) {
+        if (firstName.isBlank()) {
+            return new ResponseEntity<>("Your name is missing.", HttpStatus.FORBIDDEN);
+        } else if (!firstName.matches("^[a-zA-Z]*$")) {
+            return new ResponseEntity<>("Please enter a valid FirstName. Only letters are allowed.", HttpStatus.FORBIDDEN);
+        }
 
-            return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
+        if (lastName.isBlank()) {
+            return new ResponseEntity<>("Your last name is missing.", HttpStatus.FORBIDDEN);
+        }
+        else if (!lastName.matches("^[a-zA-Z]*$")) {
+            return new ResponseEntity<>("Please enter a valid LastName. Only letters are allowed.", HttpStatus.FORBIDDEN);
+        }
 
+        if (email.isBlank()) {
+            return new ResponseEntity<>("Your email is missing.", HttpStatus.FORBIDDEN);
+        }
+        else if (!email.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")) {
+            return new ResponseEntity<>("Please enter a valid Email address.", HttpStatus.FORBIDDEN);
+        }
+
+        if (password.isBlank()) {
+            return new ResponseEntity<> ("Your password is missing", HttpStatus.FORBIDDEN);
         }
 
         if (clientRepository.findByEmail(email) != null) {
-
-            return new ResponseEntity<>("Name already in use", HttpStatus.FORBIDDEN);
-
+            return new ResponseEntity<>("Email already in use", HttpStatus.FORBIDDEN);
         }
+
 
         Client newClient = new Client(firstName, lastName, email, passwordEncoder.encode(password));
         clientRepository.save(newClient);

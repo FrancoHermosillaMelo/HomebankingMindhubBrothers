@@ -53,6 +53,9 @@
 					<h1 class="d-flex justify-content-center align-items-center">Welcome <span class="ps-3 text-welcome">{{datos.firstName}}!</span></h1>
 				</div>
 				<h2 class="text-center pt-5 text-light text-main">ACCOUNTS</h2>
+				<template v-if="accounts.length !== 3">
+					<button @click="createAccount" type="submit" class="d-flex m-auto mt-4 btn-account">ADD ACCOUNTS</button>
+				</template>
 				<div class="pt-5 d-flex justify-content-around flex-wrap div-account gap-5">
 					<div class="div-main d-flex flex-column justify-content-evenly text-center" v-for="dato of datos.account">
 						<h3 class="h3-account text-center">{{dato.number}}</h3>
@@ -67,7 +70,7 @@
 						<div>
 							<h4><span class="span">-</span>TRANSACTIONS<span class="span">-</span></h4>
 
-							<a :href="'./account.html?id=' + dato.id" class="a-trans"><ion-icon class="icon-debit" name="swap-vertical-outline"></ion-icon></a>
+							<a :href="'./account.html?id=' + dato.id" class="a-trans"><img class="icon-debit" src="../img/transaction-icon.png" alt="" /></a>
 						</div>
 					</div>
 				</div>

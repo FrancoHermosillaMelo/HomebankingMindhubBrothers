@@ -4,6 +4,7 @@ createApp({
 	data() {
 		return {
 			datos: [],
+			cards: [],
 			cardsCredit: [],
 			cardsDebit: [],
 		};
@@ -17,6 +18,7 @@ createApp({
 				.get('http://localhost:8080/api/clients/current')
 				.then(response => {
 					this.datos = response.data;
+					this.cards = this.datos.cards;
 					this.cardsCredit = this.datos.cards.filter(card => card.type == 'CREDIT');
 					this.cardsDebit = this.datos.cards.filter(card => card.type == 'DEBIT');
 				})
@@ -38,7 +40,7 @@ createApp({
 							window.location.href = '/web/index.html';
 						})
 						.catch(error => {
-							Swal.showValidationMessage(`Request failed: ${error}`);
+							console.log(error);
 						});
 				},
 				allowOutsideClick: () => !Swal.isLoading(),

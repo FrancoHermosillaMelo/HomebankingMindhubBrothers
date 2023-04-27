@@ -3,23 +3,23 @@ const {createApp} = Vue;
 createApp({
 	data() {
 		return {
-			account: [],
-			transactions: [],
-			id: new URLSearchParams(location.search).get('id'),
+			color: '',
+			type: '',
 		};
 	},
-	created() {
-		this.loadData();
-	},
+
 	methods: {
-		loadData() {
+		addCards() {
 			axios
-				.get('http://localhost:8080/api/clients/current/accounts/' + this.id)
-				.then(response => {
-					this.account = response.data;
-					this.transactions = this.account.transactionDTOS;
-				})
-				.catch(error => console.log(error));
+				.post('/api/clients/current/cards', 'type=' + this.type + '&color=' + this.color)
+				.then(response => (window.location.href = '/web/html/cards.html'))
+				.catch(error =>
+					Swal.fire({
+						icon: 'error',
+						text: error.response.data,
+						confirmButtonColor: '#7c601893',
+					})
+				);
 		},
 		logout() {
 			Swal.fire({

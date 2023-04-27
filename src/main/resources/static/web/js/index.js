@@ -38,8 +38,8 @@ createApp({
 				.catch(error =>
 					Swal.fire({
 						icon: 'error',
-						title: 'Oh!',
-						text: 'The email used is already in use',
+						text: error.response.data,
+						confirmButtonColor: '#7c601893',
 					})
 				);
 		},
@@ -47,7 +47,7 @@ createApp({
 	computed: {
 		charP() {
 			this.firstname = this.firstname.charAt(0).toUpperCase() + this.firstname.slice(1);
-			this.lastname = this.lastname.charAt(0).toUpperCase() + this.firstname.slice(1);
+			this.lastname = this.lastname.charAt(0).toUpperCase() + this.lastname.slice(1);
 		},
 	},
 }).mount('#app');

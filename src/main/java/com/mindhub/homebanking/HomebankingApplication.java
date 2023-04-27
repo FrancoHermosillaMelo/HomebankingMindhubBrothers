@@ -84,7 +84,7 @@ public class HomebankingApplication {
 
 			Card card1 = new Card(client1.getFirstName() + " " + client1.getLastName(), CardType.DEBIT, CardColor.GOLD, "4787-3459-2485-4715", 745, day, day.plusYears(5));
 			Card card2 = new Card(client1.getFirstName() + " " + client1.getLastName(), CardType.CREDIT, CardColor.TITANIUM,"3512-5488-4264-7175", 841, day, day.plusYears(5));
-			Card card3 = new Card("Franco Hermosilla Melo", CardType.CREDIT, CardColor.SILVER, "3750-6120-4687-3347", 514, day, day.plusYears(5));
+			Card card3 = new Card("Franco Hermosilla", CardType.CREDIT, CardColor.SILVER, "3750-6120-4687-3347", 514, day, day.plusYears(5));
 
 			client1.addCard(card1);
 			client1.addCard(card2);

@@ -15,6 +15,7 @@ main {
 .card {
 	width: 400px;
 	height: 250px;
+	margin-bottom: 15px;
 }
 .flip {
 	width: inherit;
@@ -37,9 +38,6 @@ main {
 	backface-visibility: hidden;
 
 	overflow: hidden;
-}
-.center {
-	min-height: 50vh;
 }
 .SILVER {
 	background-image: linear-gradient(to right, silver, #c9c9b4);
@@ -216,6 +214,8 @@ main {
 	font-size: 10px;
 	text-align: justify;
 }
+/*------------------------------carrusel------------------------------------------*/
+
 @-webkit-keyframes flip {
 	0%,
 	100% {
@@ -235,9 +235,12 @@ main {
 	}
 }
 
-@media (min-width: 319px) and (max-width: 1000px) {
+@media (min-width: 319px) and (max-width: 790px) {
 	.pt {
 		padding-top: 20px;
 		height: 60em !important;
+	}
+	main {
+		min-height: 180vh !important;
 	}
 }
