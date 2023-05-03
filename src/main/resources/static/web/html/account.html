@@ -34,10 +34,13 @@
 						<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
 							<ul class="navbar-nav">
 								<li class="nav-item">
-									<a class="nav-link active text-center" aria-current="page" href="./accounts.html">Home</a>
+									<a class="nav-link hovers text-center" aria-current="page" href="./accounts.html">MyAccounts</a>
 								</li>
 								<li class="nav-item ps-2">
 									<a class="nav-link hovers text-center" aria-current="page" href="./cards.html">MyCards</a>
+								</li>
+								<li class="nav-item ps-2">
+									<a class="nav-link hovers text-center" aria-current="page" href="./transfers.html">Transfers</a>
 								</li>
 								<li class="ps-2 exit1">
 									<a @click.prevent="logout" class="nav-link logout"><ion-icon class="exit" name="exit-outline"></ion-icon></a>
@@ -53,7 +56,7 @@
 				</div>
 				<div class="div-trans d-flex justify-content-center align-items-center">
 					<table class="table container">
-						<thead class="table-light">
+						<thead class="table-light text-center">
 							<tr>
 								<td class="text-trans">Date</td>
 								<td class="text-trans">Amount</td>
@@ -61,10 +64,15 @@
 								<td class="text-trans">Type</td>
 							</tr>
 						</thead>
-						<tbody>
-							<tr :class="dato.type" v-for="dato of transactions">
+						<tbody class="text-center">
+							<tr :class="dato.type" v-for="dato of transactionOrder">
 								<td class="text-trans">{{dato.date.slice(0,10)}} | {{dato.date.slice(11,16)}}</td>
-								<td class="text-trans">{{dato.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}$</td>
+								<template v-if="dato.type == 'CREDIT'">
+									<td class="text-trans">+${{dato.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
+								</template>
+								<template v-else>
+									<td class="text-trans">-${{dato.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
+								</template>
 								<td class="text-trans">{{dato.description}}</td>
 								<td class="text-trans">{{dato.type}}</td>
 							</tr>

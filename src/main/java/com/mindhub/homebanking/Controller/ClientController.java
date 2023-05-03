@@ -28,7 +28,7 @@ public class ClientController {
     private String randomNumber(){
         String randomNumber;
         do {
-            int number = (int) (Math.random() * 999999 + 100000);
+            int number = (int) (Math.random() * 899999 + 100000);
             randomNumber = "VIN-" + number;
         } while (accountRepository.findByNumber(randomNumber) != null);
         return randomNumber;

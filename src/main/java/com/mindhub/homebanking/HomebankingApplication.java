@@ -33,8 +33,8 @@ public class HomebankingApplication {
 			repository.save(client1);
 			repository.save(client2);
 
-			Account account1 = new Account("VIN001", day  , 5000.0);
-			Account account2 = new Account("VIN002", day.plusDays(1), 7500.0);
+			Account account1 = new Account("VIN-001", day  , 5000.0);
+			Account account2 = new Account("VIN-002", day.plusDays(1), 7500.0);
 			client1.addAccount(account1);
 			client1.addAccount(account2);
 			Repository.save(account1);

@@ -5,6 +5,7 @@ createApp({
 		return {
 			account: [],
 			transactions: [],
+			transactionOrder: [],
 			id: new URLSearchParams(location.search).get('id'),
 		};
 	},
@@ -18,9 +19,11 @@ createApp({
 				.then(response => {
 					this.account = response.data;
 					this.transactions = this.account.transactionDTOS;
+					this.transactionOrder = this.transactions.sort((a, b) => b.id - a.id);
 				})
 				.catch(error => console.log(error));
 		},
+
 		logout() {
 			Swal.fire({
 				title: 'Are you sure that you want to log out',

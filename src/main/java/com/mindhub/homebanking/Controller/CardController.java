@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 @RestController
 public class CardController {
@@ -29,17 +30,21 @@ public class CardController {
 
     private String randomNumberCards(){
         String randomCards = "";
+        String randomCardsEnd = "";
         for (int i = 0; i < 4; i++){
             int min = 1000;
             int max = 8999;
             randomCards += (int) (Math.random() * max + min) + "-";
+
         }
-        return randomCards;
+        randomCardsEnd = randomCards.substring(0, randomCards.length()-1);
+        return randomCardsEnd;
     }
     private int randomCvv(){
         int cvvRandom = (int)(Math.random()*899 + 100);
         return cvvRandom;
     }
+
     @RequestMapping("/api/clients/current/cards")
     public List<CardDTO> getAccounts (Authentication authentication){
         return new ClientDTO(clientRepository.findByEmail(authentication.getName())).getCards().stream().collect(Collectors.toList());
@@ -59,21 +64,20 @@ public class CardController {
         }while(cardRepository.findByNumber(cardsNumber) != null);
 
         int cardsCvv;
-
+// cambiar
         do {
             cardsCvv = randomCvv();
         }while (cardRepository.findByCvv(cardsCvv) != null);
 
         Client selectClient = clientRepository.findByEmail(authentication.getName());
 
-        for (Card card : selectClient.getCards()) {
-            if (card.getType().equals(type) && card.getColor().equals((color))) {
-                return new ResponseEntity<>("You already have this color and type of card", HttpStatus.FORBIDDEN);
-            }
+        Set<Card> cards = selectClient.getCards().stream().filter(card -> card.getType() == type).collect(Collectors.toSet());
+        if (cards.stream().anyMatch(card -> card.getColor() == color)){
+            return new ResponseEntity<>("You can't have same cards", HttpStatus.FORBIDDEN);
         }
 
         Card newCard = new Card(selectClient.getFirstName() + " " + selectClient.getLastName(),type,color,randomNumberCards(),randomCvv(), LocalDateTime.now(),LocalDateTime.now().plusYears(5));
-        clientRepository.findByEmail(authentication.getName()).addCard(newCard);
+        selectClient.addCard(newCard);
         cardRepository.save(newCard);
 
         return  new ResponseEntity<>(HttpStatus.CREATED);

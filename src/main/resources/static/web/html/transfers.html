@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>HOMEBANKING | TRANSFERS</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp"
+			crossorigin="anonymous"
+		/>
+		<link rel="shortcut icon" href="../img/logo.png" type="image/x-icon" />
+		<link rel="stylesheet" href="../css/account.css" />
+		<link rel="stylesheet" href="../css/transfers.css" />
+		<link rel="stylesheet" href="../css/index.css" />
+	</head>
+	<body>
+		<div id="app">
+			<header>
+				<nav class="navbar navbar-expand-lg">
+					<div class="container-fluid ps-5 pe-5">
+						<img src="../img/logo.png" alt="logo" class="img-header" />
+						<span class="text-light fs-5 txt-header-span">MINDHUB BROTHERS</span>
+						<button
+							class="navbar-toggler"
+							type="button"
+							data-bs-toggle="collapse"
+							data-bs-target="#navbarNav"
+							aria-controls="navbarNav"
+							aria-expanded="false"
+							aria-label="Toggle navigation"
+						>
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+							<ul class="navbar-nav">
+								<li class="nav-item pe-2">
+									<a class="nav-link hovers text-center" aria-current="page" href="./accounts.html">MyAccounts</a>
+								</li>
+								<li class="nav-item nav-card pe-2">
+									<a class="nav-link hovers text-center" aria-current="page" href="./cards.html">MyCards</a>
+								</li>
+								<li class="nav-item active">
+									<a class="nav-link text-center" aria-current="page" href="./transfers.html">Transfers</a>
+								</li>
+								<li class="ps-2 exit1">
+									<a @click.prevent="logout" class="nav-link logout"><ion-icon class="exit" name="exit-outline"></ion-icon></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</nav>
+			</header>
+			<main class="d-flex align-items-center justify-content-center gap-5 flex-wrap">
+				<div>
+					<div class="div-transfers d-flex flex-column align-items-center justify-content-center mb-5">
+						<a @click="addclass1" href="#"
+							><h3 class="text-light text-center">Transfers to own account</h3>
+							<ion-icon class="text-light d-flex m-auto fs-2" name="finger-print-outline"></ion-icon
+						></a>
+					</div>
+					<div class="div-transfers d-flex flex-colum align-items-center justify-content-centern">
+						<a @click="addclass2" href="#"
+							><h3 class="text-light text-center">Transfers to third party account</h3>
+							<ion-icon class="text-light d-flex m-auto fs-2" name="people-outline"></ion-icon
+						></a>
+					</div>
+				</div>
+				<div class="div-form-transfers d-flex justify-content-center align-items-center ms-5">
+					<template v-if="claseagregada">
+						<form @submit.prevent="addTransaction" class="align-items-center d-flex justify-content-center flex-column">
+							<div class="d-flex gap-2">
+								<select class="form-select" multiple aria-label="multiple select example" v-model="account1">
+									<option class="text-center opt" disabled value="">SEND</option>
+									<template v-for="accounts of accountOrder">
+										<option class="text-center opt" :value="accounts.number">{{accounts.number}} | U$D {{accounts.balance}}</option>
+									</template>
+								</select>
+								<select class="form-select" multiple aria-label="multiple select example" v-model="account2">
+									<option class="text-center opt" disabled value="">RECEIVES</option>
+									<template v-for="accounts of accountOrder">
+										<option class="text-center opt" :value="accounts.number">{{accounts.number}} | U$D {{accounts.balance}}</option>
+									</template>
+								</select>
+							</div>
+							<div class="mb-3 input-box d-flex align-items-center justify-content-center">
+								<ion-icon class="pe-3" name="cash-outline"></ion-icon>
+								<input required type="number" step=".01" class="form-control" placeholder="Amount to send" v-model="amount" />
+							</div>
+							<div class="mb-3 input-box">
+								<div class="d-flex align-items-center justify-content-center">
+									<ion-icon class="pe-3" name="chatbox-ellipses-outline"></ion-icon>
+									<input required type="text" class="form-control" placeholder="Description" v-model="description" />
+								</div>
+							</div>
+							<button type="submit" class="btn btn-primary">SEND</button>
+						</form>
+					</template>
+					<template v-else>
+						<form @submit.prevent="addTransaction" class="align-items-center d-flex justify-content-center flex-column">
+							<select class="form-select" multiple aria-label="multiple select example" v-model="account1">
+								<option class="text-center opt" disabled value="">YOUR ACCOUNTS</option>
+								<template v-for="accounts of accountOrder">
+									<option class="text-center opt" :value="accounts.number">{{accounts.number}} | U$D {{accounts.balance}}</option>
+								</template>
+							</select>
+							<div class="mb-3 input-box d-flex align-items-center justify-content-center">
+								<ion-icon class="pe-3" name="reader-outline"></ion-icon>
+								<input required type="text" class="form-control" placeholder="Account number" v-model="account2" />
+							</div>
+							<div class="mb-3 input-box d-flex align-items-center justify-content-center">
+								<ion-icon class="pe-3" name="cash-outline"></ion-icon>
+								<input required type="number" class="form-control" placeholder="Amount to send" v-model="amount" />
+							</div>
+							<div class="mb-3 input-box">
+								<div class="d-flex align-items-center justify-content-center">
+									<ion-icon class="pe-3" name="chatbox-ellipses-outline"></ion-icon>
+									<input required type="text" class="form-control" placeholder="Description" v-model="description" />
+								</div>
+							</div>
+							<button type="submit" class="btn btn-primary">SEND</button>
+						</form>
+					</template>
+				</div>
+			</main>
+			<footer class="d-flex justify-content-between align-items-center flex-wrap footer">
+				<div class="d-flex justify-content-evenly ps-5 div-redes">
+					<a href="https://twitter.com/?lang=es" target="_blank"><ion-icon class="twitter pe-5" name="logo-twitter"></ion-icon></a>
+					<a
+						href="https://www.facebook.com/?stype=lo&jlou=AfffVveciDyf5KfxOjIp2ZfxOJrcoWkofVg7BatuPUqbUTBRc5Z_Zc7wD2r2LhQzpqh7D0Ey3KVkNDMMdjzbtt_Z7lFjaTbRjXujd9VM8l2Zzw&smuh=45536&lh=Ac_fNpk9LXOq1f7U"
+						target="
+            "
+						><ion-icon class="facebook" name="logo-facebook"></ion-icon
+					></a>
+				</div>
+				<h4 class="pe-5 text-footer">
+					<a class="linkedin" href="https://www.linkedin.com/in/franco-agustin-hermosilla-melo/" target="_blank"
+						>Franco Hermosilla Melo <span>Cohort 44</span></a
+					>
+				</h4>
+			</footer>
+		</div>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+			crossorigin="anonymous"
+		></script>
+		<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+		<script src="../js/transfers.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+		<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+	</body>
+</html>
