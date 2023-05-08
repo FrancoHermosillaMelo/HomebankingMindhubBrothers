@@ -5,6 +5,8 @@ import com.mindhub.homebanking.Models.Account;
 import com.mindhub.homebanking.Models.Client;
 import com.mindhub.homebanking.Repositories.AccountRepository;
 import com.mindhub.homebanking.Repositories.ClientRepository;
+import com.mindhub.homebanking.Service.AccountService;
+import com.mindhub.homebanking.Service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,11 +21,15 @@ import java.util.stream.Collectors;
 @RestController
 public class ClientController {
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientService clientService;
+//    @Autowired
+//    private ClientRepository clientRepository;
     @Autowired
     private AccountRepository accountRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private AccountService accountService;
 
     private String randomNumber(){
         String randomNumber;
@@ -36,11 +42,11 @@ public class ClientController {
 
     @RequestMapping("/api/clients")
     public List<ClientDTO> getClients() {
-        return clientRepository.findAll().stream().map(client -> new ClientDTO(client)).collect(Collectors.toList());
+        return clientService.getClient();
     }
     @RequestMapping("/api/clients/current")
     public ClientDTO getClient(Authentication authentication) {
-        return new ClientDTO(clientRepository.findByEmail(authentication.getName()));
+        return clientService.getClientAuthentication(authentication);
     }
 
     @RequestMapping(path = "/api/clients", method = RequestMethod.POST)
@@ -76,17 +82,17 @@ public class ClientController {
             return new ResponseEntity<> ("Your password is missing", HttpStatus.FORBIDDEN);
         }
 
-        if (clientRepository.findByEmail(email) != null) {
+        if (clientService.findByEmail(email) != null) {
             return new ResponseEntity<>("Email already in use", HttpStatus.FORBIDDEN);
         }
 
 
         Client newClient = new Client(firstName, lastName, email, passwordEncoder.encode(password));
-        clientRepository.save(newClient);
+        clientService.saveClient(newClient);
         String accountNumber = randomNumber();
         Account newAccount = new Account(accountNumber, LocalDateTime.now(), 0.0);
         newClient.addAccount(newAccount);
-        accountRepository.save(newAccount);
+        accountService.saveAccount(newAccount);
 
 
         return new ResponseEntity<>(HttpStatus.CREATED);

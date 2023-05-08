@@ -16,7 +16,7 @@ body::-webkit-scrollbar-thumb {
 	border-right: 2px solid #161a1e;
 }
 .main-color {
-	height: 100vh;
+	min-height: 100vh;
 	background-color: #161a1e;
 }
 .txt-h5 {
@@ -134,7 +134,7 @@ ion-icon {
 	box-shadow: -1px 1px 10px 4px rgba(231, 212, 158, 0.69) !important;
 }
 .card:hover {
-	box-shadow: -1px 1px 10px 4px rgba(231, 212, 158, 0.69) !important;
+	transform: translateY(-3%);
 }
 .card-body > h5 {
 	cursor: default;
@@ -151,6 +151,42 @@ ion-icon {
 	height: 15em;
 	object-fit: cover;
 	border-radius: 50px 0px 40px 40px !important;
+}
+
+.footer {
+	background-color: #161a1e;
+	height: 4em;
+	border-top: 1px solid grey;
+}
+.twitter {
+	font-size: 40px;
+	color: gray;
+	cursor: pointer;
+}
+.facebook {
+	font-size: 40px;
+	color: gray;
+	cursor: pointer;
+}
+.twitter:hover {
+	color: aqua;
+}
+.facebook:hover {
+	color: rgb(0, 106, 255);
+}
+.text-footer {
+	color: gray;
+}
+.text-p {
+	color: #e7d49e;
+}
+.linkedin {
+	text-decoration: none;
+	color: gray;
+}
+.linkedin > span {
+	font-weight: bold !important;
+	color: #e7d49e !important;
 }
 
 /*-----------------------------ALERTAS--------------------------------------*/

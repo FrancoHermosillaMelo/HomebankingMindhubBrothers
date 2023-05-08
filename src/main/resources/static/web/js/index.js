@@ -6,7 +6,9 @@ createApp({
 			firstname: '',
 			lastname: '',
 			email: '',
+			emailRegister: '',
 			password: '',
+			passwordRegister: '',
 			claseagregada: true,
 		};
 	},
@@ -33,8 +35,15 @@ createApp({
 		},
 		register() {
 			axios
-				.post('/api/clients', 'firstName=' + this.firstname + '&lastName=' + this.lastname + '&email=' + this.email + '&password=' + this.password)
-				.then(response => this.signIn())
+				.post(
+					'/api/clients',
+					'firstName=' + this.firstname + '&lastName=' + this.lastname + '&email=' + this.emailRegister + '&password=' + this.passwordRegister
+				)
+				.then(response => {
+					this.password = this.passwordRegister;
+					this.email = this.emailRegister;
+					this.signIn();
+				})
 				.catch(error =>
 					Swal.fire({
 						icon: 'error',
@@ -51,3 +60,8 @@ createApp({
 		},
 	},
 }).mount('#app');
+
+window.onload = function () {
+	$('#onload').fadeOut();
+	$('body').removeClass('hidden');
+};

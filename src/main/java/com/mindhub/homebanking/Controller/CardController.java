@@ -8,6 +8,8 @@ import com.mindhub.homebanking.Models.CardType;
 import com.mindhub.homebanking.Models.Client;
 import com.mindhub.homebanking.Repositories.CardRepository;
 import com.mindhub.homebanking.Repositories.ClientRepository;
+import com.mindhub.homebanking.Service.CardService;
+import com.mindhub.homebanking.Service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,10 +25,14 @@ import java.util.Set;
 import java.util.stream.Collectors;
 @RestController
 public class CardController {
+//    @Autowired
+//    private CardRepository cardRepository;
+//    @Autowired
+//    private ClientRepository clientRepository;
     @Autowired
-    private CardRepository cardRepository;
+    private CardService cardService;
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientService clientService;
 
     private String randomNumberCards(){
         String randomCards = "";
@@ -46,8 +52,8 @@ public class CardController {
     }
 
     @RequestMapping("/api/clients/current/cards")
-    public List<CardDTO> getAccounts (Authentication authentication){
-        return new ClientDTO(clientRepository.findByEmail(authentication.getName())).getCards().stream().collect(Collectors.toList());
+    public List<CardDTO> getCard (Authentication authentication){
+        return cardService.getCard(authentication);
     }
 
     @RequestMapping(path = "/api/clients/current/cards", method = RequestMethod.POST)
@@ -61,24 +67,19 @@ public class CardController {
         String cardsNumber;
         do {
              cardsNumber = randomNumberCards();
-        }while(cardRepository.findByNumber(cardsNumber) != null);
+        }while(cardService.findByNumber(cardsNumber) != null);
 
-        int cardsCvv;
-// cambiar
-        do {
-            cardsCvv = randomCvv();
-        }while (cardRepository.findByCvv(cardsCvv) != null);
-
-        Client selectClient = clientRepository.findByEmail(authentication.getName());
+        Client selectClient = clientService.findByEmail(authentication.getName());
 
         Set<Card> cards = selectClient.getCards().stream().filter(card -> card.getType() == type).collect(Collectors.toSet());
+
         if (cards.stream().anyMatch(card -> card.getColor() == color)){
             return new ResponseEntity<>("You can't have same cards", HttpStatus.FORBIDDEN);
         }
 
         Card newCard = new Card(selectClient.getFirstName() + " " + selectClient.getLastName(),type,color,randomNumberCards(),randomCvv(), LocalDateTime.now(),LocalDateTime.now().plusYears(5));
         selectClient.addCard(newCard);
-        cardRepository.save(newCard);
+        cardService.saveCard(newCard);
 
         return  new ResponseEntity<>(HttpStatus.CREATED);
 

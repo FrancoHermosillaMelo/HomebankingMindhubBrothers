@@ -92,7 +92,7 @@ main {
 	border-right: 2px solid #e7d49e;
 }
 .btn-account:hover {
-	border-bottom: 3px solid #e7d49e;
+	transform: translateY(-3%);
 }
 .btn-cards {
 	cursor: pointer;
@@ -106,7 +106,21 @@ main {
 	border-right: 2px solid #e7d49e;
 }
 .btn-cards:hover {
-	border-bottom: 3px solid #e7d49e;
+	transform: translateY(-3%);
+}
+.btn-loan {
+	cursor: pointer;
+	text-decoration: none;
+	padding: 15px;
+	width: 15em;
+	border-radius: 10px;
+	background-color: #161a1e;
+	color: white;
+	border-bottom: 4px solid #e7d49e;
+	border-right: 2px solid #e7d49e;
+}
+.btn-loan:hover {
+	transform: translateY(-3%);
 }
 .div-account {
 	padding-bottom: 8em !important;
@@ -240,6 +254,41 @@ body.swal2-shown > [aria-hidden='true'] {
 .form-select {
 	margin-top: 15px;
 	margin-bottom: 25px;
+}
+/*-------------------------------LOADER-------------------------------------*/
+.hidden {
+	overflow: hidden;
+}
+.center1 {
+	height: 100vh;
+	background-color: #161a1e;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.lds-dual-ring {
+	display: inline-block;
+	width: 80px;
+	height: 80px;
+}
+.lds-dual-ring:after {
+	content: ' ';
+	display: block;
+	width: 64px;
+	height: 64px;
+	margin: 8px;
+	border-radius: 50%;
+	border: 6px solid #e7d49e;
+	border-color: #e7d49e transparent #e7d49e transparent;
+	animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
 }
 @media (min-width: 319px) and (max-width: 1000px) {
 	.encabezado > h1 {
