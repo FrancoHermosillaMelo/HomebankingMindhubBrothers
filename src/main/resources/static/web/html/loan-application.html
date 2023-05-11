@@ -66,7 +66,7 @@
 							<select @Change="filterPayments" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" v-model="loanType">
 								<option selected value="" class="text-center">LOANS</option>
 								<template v-for="loan of loans">
-									<option :value="loan.name">{{loan.name}}</option>
+									<option :value="loan.name">{{loan.name.toUpperCase()}}</option>
 								</template>
 							</select>
 							<h4 class="text-light">Choose in how many installments</h4>
@@ -98,11 +98,12 @@
 								</template>
 							</select>
 						</div>
-						<p class="text-p-loans">Remember that you will have to repay 20% more than the requested loan</p>
-						<h4 class="text-light text-center">MAX AMOUNT : U$D <span class="text-light">{{paymentsFilter.maxAmount}}</span></h4>
+						<p class="text-p-loans text-center">Remember that each loan has a different interest rate</p>
+						<h4 class="text-light text-center mb-1">INTEREST RATE : <span class="text-light">{{paymentsFilter.interests}}</span></h4>
+						<h4 class="text-light text-center mb-1">MAX AMOUNT : U$D <span class="text-light">{{paymentsFilter.maxAmount}}</span></h4>
 						<button type="submit" class="btn btn-primary d-flex m-auto">REQUEST</button>
 					</form>
-					<div class="div-form-loans">
+					<div class="div-form-loans table-responsive">
 						<table class="table container">
 							<thead class="table-light">
 								<tr>
@@ -116,7 +117,7 @@
 								<tr>
 									<td class="text-light text-center">{{paymentsFilter.name}}</td>
 									<td class="text-light text-center">{{payments}}</td>
-									<td class="text-light text-center">U$D {{(amount * 1.2).toLocaleString('en-US')}}</td>
+									<td class="text-light text-center">U$D {{finalAmount.toLocaleString('en-US')}}</td>
 									<td class="text-light text-center">U$D {{quotas.toLocaleString('en-US')}}</td>
 									<!-- .toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") -->
 								</tr>

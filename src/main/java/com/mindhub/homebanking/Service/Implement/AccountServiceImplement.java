@@ -6,6 +6,7 @@ import com.mindhub.homebanking.Models.Account;
 import com.mindhub.homebanking.Repositories.AccountRepository;
 import com.mindhub.homebanking.Repositories.ClientRepository;
 import com.mindhub.homebanking.Service.AccountService;
+import com.mindhub.homebanking.Utils.UtilsAccount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,21 @@ public class AccountServiceImplement implements AccountService {
     @Override
     public Account findByNumber(String number) {
         return accountRepository.findByNumber(number);
+    }
+
+    @Override
+    public Account findById(long id) {
+        return accountRepository.findById(id);
+    }
+
+    @Override
+    public String randomNumberAccount() {
+        String randomNumber;
+        do {
+            int number = UtilsAccount.randomNumberAccount();
+            randomNumber = "VIN-" + number;
+        } while (findByNumber(randomNumber) != null);
+        return randomNumber;
     }
 
     @Override

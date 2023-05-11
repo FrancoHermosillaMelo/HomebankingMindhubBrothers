@@ -76,12 +76,22 @@ main {
 	max-width: fit-content;
 	margin: auto;
 }
+.icon-delete {
+	font-size: 2em;
+	cursor: pointer;
+}
+.icon-pay {
+	font-size: 1.5em;
+}
 .div-main {
 	width: 30em;
 	height: 30em;
 	background-color: white;
 	border-radius: 20px;
 	box-shadow: 1px 1px 20px 5px #e7d49e;
+}
+.div-cards {
+	min-height: 25em;
 }
 .btn-account {
 	padding: 15px;
@@ -189,14 +199,19 @@ main {
 	font-weight: bold !important;
 	color: #e7d49e !important;
 }
-
+.div-check {
+	width: 30em;
+}
+.icon-pay {
+	cursor: pointer;
+}
 /*---------------------------TRANSACTIONS----------------------------------------*/
 
 .main-trans {
 	min-height: 82.8vh;
 }
 .div-trans {
-	min-height: 38em;
+	min-height: 8em;
 }
 .text-trans {
 	font-weight: 400;
@@ -311,6 +326,7 @@ body.swal2-shown > [aria-hidden='true'] {
 	}
 	.active {
 		min-height: 40px !important;
+		margin: auto;
 	}
 	.exit1 {
 		padding: 0 !important;
@@ -338,6 +354,13 @@ body.swal2-shown > [aria-hidden='true'] {
 	}
 	.div-cards-create {
 		width: 100vw;
+	}
+	.div-trans {
+		overflow-y: scroll;
+	}
+	.form-date {
+		flex-direction: column !important;
+		align-items: center !important;
 	}
 	/* .linkedin {
 		margin-bottom: 50px;

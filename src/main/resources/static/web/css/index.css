@@ -155,7 +155,7 @@ ion-icon {
 
 .footer {
 	background-color: #161a1e;
-	height: 4em;
+	min-height: 4em;
 	border-top: 1px solid grey;
 }
 .twitter {
@@ -219,5 +219,25 @@ body.swal2-shown > [aria-hidden='true'] {
 	}
 	.img-index {
 		display: none;
+	}
+	.div-redes {
+		padding: 0 !important;
+	}
+	main {
+		padding-bottom: 2em;
+	}
+	.content-p {
+		width: 15em;
+		color: white;
+	}
+	.content-p > p {
+		text-shadow: 0px 0px 5px black;
+	}
+	.footer {
+		justify-content: center !important;
+		padding-top: 10px;
+	}
+	.text-footer {
+		padding: 0 !important;
 	}
 }

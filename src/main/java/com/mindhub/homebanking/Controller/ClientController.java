@@ -2,6 +2,7 @@ package com.mindhub.homebanking.Controller;
 
 import com.mindhub.homebanking.DTOS.ClientDTO;
 import com.mindhub.homebanking.Models.Account;
+import com.mindhub.homebanking.Models.AccountType;
 import com.mindhub.homebanking.Models.Client;
 import com.mindhub.homebanking.Repositories.AccountRepository;
 import com.mindhub.homebanking.Repositories.ClientRepository;
@@ -20,37 +21,37 @@ import java.util.stream.Collectors;
 
 @RestController
 public class ClientController {
-    @Autowired
-    private ClientService clientService;
+
 //    @Autowired
 //    private ClientRepository clientRepository;
+//    @Autowired
+//    private AccountRepository accountRepository;
     @Autowired
-    private AccountRepository accountRepository;
+    private ClientService clientService;
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
     private AccountService accountService;
 
-    private String randomNumber(){
-        String randomNumber;
-        do {
-            int number = (int) (Math.random() * 899999 + 100000);
-            randomNumber = "VIN-" + number;
-        } while (accountRepository.findByNumber(randomNumber) != null);
-        return randomNumber;
-    }
+//    private String randomNumber(){
+//        String randomNumber;
+//        do {
+//            int number = (int) (Math.random() * 899999 + 100000);
+//            randomNumber = "VIN-" + number;
+//        } while (accountService.findByNumber(randomNumber) != null);
+//        return randomNumber;
+//    }
 
-    @RequestMapping("/api/clients")
+    @GetMapping("/api/clients")
     public List<ClientDTO> getClients() {
         return clientService.getClient();
     }
-    @RequestMapping("/api/clients/current")
+    @GetMapping("/api/clients/current")
     public ClientDTO getClient(Authentication authentication) {
         return clientService.getClientAuthentication(authentication);
     }
 
-    @RequestMapping(path = "/api/clients", method = RequestMethod.POST)
-//    @PostMapping(path = "/api/clients")
+    @PostMapping("/api/clients")
 
     public ResponseEntity<Object> register(
 
@@ -89,8 +90,8 @@ public class ClientController {
 
         Client newClient = new Client(firstName, lastName, email, passwordEncoder.encode(password));
         clientService.saveClient(newClient);
-        String accountNumber = randomNumber();
-        Account newAccount = new Account(accountNumber, LocalDateTime.now(), 0.0);
+        String accountNumber = accountService.randomNumberAccount();
+        Account newAccount = new Account(accountNumber, LocalDateTime.now(), 0.0,true, AccountType.CURRENT);
         newClient.addAccount(newAccount);
         accountService.saveAccount(newAccount);
 

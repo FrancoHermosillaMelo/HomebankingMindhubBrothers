@@ -11,5 +11,9 @@ public interface CardService {
     List<CardDTO> getCard(Authentication authentication);
     Card findByNumber(String number);
     Card findByCvv(int cvv);
+    Card findById(Long id);
+    String randomNumberCards();
+    int randomCvv();
+    String cardNumberNotRepeat();
     void saveCard(Card card);
 }

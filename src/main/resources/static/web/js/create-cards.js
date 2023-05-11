@@ -37,7 +37,11 @@ createApp({
 							window.location.href = '/web/index.html';
 						})
 						.catch(error => {
-							Swal.showValidationMessage(`Request failed: ${error}`);
+							Swal.fire({
+								icon: 'error',
+								text: error.response.data,
+								confirmButtonColor: '#7c601893',
+							});
 						});
 				},
 				allowOutsideClick: () => !Swal.isLoading(),

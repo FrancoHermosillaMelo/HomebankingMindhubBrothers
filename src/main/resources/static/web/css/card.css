@@ -238,7 +238,7 @@ main {
 @media (min-width: 319px) and (max-width: 790px) {
 	.pt {
 		padding-top: 20px;
-		height: 60em !important;
+		min-height: 60em !important;
 	}
 	main {
 		min-height: 180vh !important;

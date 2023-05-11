@@ -17,7 +17,13 @@ createApp({
 		signIn() {
 			axios
 				.post('/api/login', 'email=' + this.email + '&password=' + this.password)
-				.then(response => (window.location.href = '/web/html/accounts.html'))
+				.then(response => {
+					if (this.email == 'hermosilla@gmail.com') {
+						window.location.replace('/manager.html');
+					} else {
+						window.location.replace('./html/accounts.html');
+					}
+				})
 				.catch(error =>
 					Swal.fire({
 						icon: 'error',

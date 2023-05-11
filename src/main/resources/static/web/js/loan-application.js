@@ -12,6 +12,7 @@ createApp({
 			paymentsFilter: '',
 			loanType: '',
 			quotas: 0,
+			finalAmount: 0,
 		};
 	},
 	created() {
@@ -32,6 +33,7 @@ createApp({
 				.get('http://localhost:8080/api/clients/current')
 				.then(response => {
 					this.accounts = response.data;
+					console.log(this.accounts);
 				})
 				.catch(error => console.log(error));
 		},
@@ -51,7 +53,11 @@ createApp({
 							window.location.href = '/web/index.html';
 						})
 						.catch(error => {
-							Swal.showValidationMessage(`Request failed: ${error}`);
+							Swal.fire({
+								icon: 'error',
+								text: error.response.data,
+								confirmButtonColor: '#7c601893',
+							});
 						});
 				},
 				allowOutsideClick: () => !Swal.isLoading(),
@@ -100,7 +106,8 @@ createApp({
 			});
 		},
 		interests() {
-			this.quotas = (this.amount * 1.2) / this.payments;
+			this.quotas = (this.amount * this.paymentsFilter.interests) / this.payments;
+			this.finalAmount = this.amount * this.paymentsFilter.interests;
 		},
 	},
 }).mount('#app');

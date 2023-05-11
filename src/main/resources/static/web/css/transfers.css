@@ -45,5 +45,12 @@
 @media (min-width: 319px) and (max-width: 1000px) {
 	.div-form-transfers {
 		margin: 0 !important;
+		min-height: auto;
+	}
+	.div-t {
+		margin-top: 50px;
+	}
+	.text-footer {
+		margin: 0 !important;
 	}
 }

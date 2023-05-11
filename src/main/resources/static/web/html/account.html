@@ -57,27 +57,41 @@
 				<div class="encabezado">
 					<h1 class="d-flex justify-content-center align-items-center">TRANSACTIONS</h1>
 				</div>
-				<div class="div-trans d-flex justify-content-center align-items-center">
-					<table class="table container">
+				<div class="form-date d-flex justify-content-center align-items-end gap-2 mt-5 mb-5">
+					<div>
+						<label class="text-light">Start date:</label>
+						<input class="form-control" type="date" id="start" min="" max="" v-model="dateStart" />
+					</div>
+					<div>
+						<label class="text-light">End date:</label>
+						<input class="form-control" type="date" id="end" min="" max="" v-model="dateEnd" />
+					</div>
+					<button class="btn btn-success" @click="pdfDow">Dowload Transactions</button>
+				</div>
+				<div class="div-trans d-flex">
+					<table class="table container table-responsive">
 						<thead class="table-light text-center">
 							<tr>
-								<td class="text-trans">Date</td>
-								<td class="text-trans">Amount</td>
-								<td class="text-trans">Description</td>
-								<td class="text-trans">Type</td>
+								<td colspan="2" class="text-trans">Date</td>
+								<td colspan="2" class="text-trans">Amount</td>
+								<td colspan="2" class="text-trans">Description</td>
+								<td colspan="2" class="text-trans">Type</td>
+								<td colspan="2" class="text-trans">Total Balance</td>
 							</tr>
 						</thead>
 						<tbody class="text-center">
+							{{filterDate}}
 							<tr :class="dato.type" v-for="dato of transactionOrder">
-								<td class="text-trans">{{dato.date.slice(0,10)}} | {{dato.date.slice(11,16)}}</td>
+								<td colspan="2" class="text-trans">{{dato.date.slice(0,10)}} | {{dato.date.slice(11,16)}}</td>
 								<template v-if="dato.type == 'CREDIT'">
-									<td class="text-trans">+${{dato.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
+									<td colspan="2" class="text-trans">+${{dato.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
 								</template>
 								<template v-else>
 									<td class="text-trans">-${{dato.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
 								</template>
-								<td class="text-trans">{{dato.description}}</td>
-								<td class="text-trans">{{dato.type}}</td>
+								<td colspan="2" class="text-trans">{{dato.description}}</td>
+								<td colspan="2" class="text-trans">{{dato.type}}</td>
+								<td colspan="2" class="text-trans">${{dato.balanceTotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
 							</tr>
 						</tbody>
 					</table>
