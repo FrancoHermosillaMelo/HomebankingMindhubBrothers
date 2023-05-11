@@ -77,15 +77,14 @@ public class TransactionController {
         selectAccount1.setBalance(selectAccount1.getBalance() - amount);
         selectAccount2.setBalance(selectAccount2.getBalance() + amount);
 
-        Transaction newTransaction = new Transaction(TransactionType.DEBIT, amount, description, LocalDateTime.now());
-        selectAccount1.addTransaction(newTransaction);
-       transactionService.saveTransaction(newTransaction);
 
-        Transaction newTransactionCredit = new Transaction(TransactionType.CREDIT, amount, description, LocalDateTime.now());
+        Transaction newTransaction = new Transaction(TransactionType.DEBIT, amount, description, LocalDateTime.now(), true, selectAccount1.getBalance());
+        selectAccount1.addTransaction(newTransaction);
+        transactionService.saveTransaction(newTransaction);
+
+        Transaction newTransactionCredit = new Transaction(TransactionType.CREDIT, amount, description, LocalDateTime.now(), true, selectAccount2.getBalance());
         selectAccount2.addTransaction(newTransactionCredit);
         transactionService.saveTransaction(newTransactionCredit);
-
-
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

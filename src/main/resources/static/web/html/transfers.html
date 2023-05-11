@@ -84,7 +84,9 @@
 								<select class="form-select" multiple aria-label="multiple select example" v-model="account2">
 									<option class="text-center opt" disabled value="">RECEIVES</option>
 									<template v-for="accounts of accountOrder">
-										<option class="text-center opt" :value="accounts.number">{{accounts.number}} | U$D {{accounts.balance}}</option>
+										<option :disabled="account1 == accounts.number ? true : false" class="text-center opt" :value="accounts.number">
+											{{accounts.number}} | U$D {{accounts.balance}}
+										</option>
 									</template>
 								</select>
 							</div>

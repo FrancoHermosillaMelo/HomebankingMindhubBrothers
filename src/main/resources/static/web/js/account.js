@@ -18,7 +18,9 @@ createApp({
 				.get('http://localhost:8080/api/clients/current/accounts/' + this.id)
 				.then(response => {
 					this.account = response.data;
+					console.log(this.account);
 					this.transactions = this.account.transactionDTOS;
+					console.log(this.transactions);
 					this.transactionOrder = this.transactions.sort((a, b) => b.id - a.id);
 				})
 				.catch(error => console.log(error));

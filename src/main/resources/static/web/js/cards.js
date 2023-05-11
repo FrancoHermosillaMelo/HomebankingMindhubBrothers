@@ -7,6 +7,8 @@ createApp({
 			cards: [],
 			cardsCredit: [],
 			cardsDebit: [],
+			cardsActive: [],
+			actualDate: new Date().toLocaleString().split(',')[0].split('/').reverse().join('-'),
 		};
 	},
 	created() {
@@ -19,10 +21,30 @@ createApp({
 				.then(response => {
 					this.datos = response.data;
 					this.cards = this.datos.cards;
-					this.cardsCredit = this.datos.cards.filter(card => card.type == 'CREDIT');
-					this.cardsDebit = this.datos.cards.filter(card => card.type == 'DEBIT');
+					this.cardsCredit = this.datos.cards.filter(card => card.type == 'CREDIT' && card.active);
+					this.cardsDebit = this.datos.cards.filter(card => card.type == 'DEBIT' && card.active);
+					this.cardsActive = this.cards.filter(card => card.active);
 				})
 				.catch(error => console.log(error));
+		},
+		cardDelete(id) {
+			Swal.fire({
+				title: 'Are you sure you want to delete this card?',
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonText: 'DELETE',
+				showLoaderOnConfirm: true,
+				preConfirm: deleteCards => {
+					return axios
+						.put(`/api/clients/current/cards/${id}`)
+						.then(response => {
+							window.location.href = '/web/html/cards.html';
+						})
+						.catch(error => {
+							console.log(error);
+						});
+				},
+			});
 		},
 		logout() {
 			Swal.fire({

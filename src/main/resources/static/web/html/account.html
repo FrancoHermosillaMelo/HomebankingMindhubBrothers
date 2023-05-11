@@ -57,6 +57,16 @@
 				<div class="encabezado">
 					<h1 class="d-flex justify-content-center align-items-center">TRANSACTIONS</h1>
 				</div>
+				<div class="form-date d-flex justify-content-center align-items-center gap-5 mt-5">
+					<div>
+						<label class="text-light" for="start">Start date:</label>
+						<input class="form-control" type="date" id="start" name="trip-start" value="2023-05-01" min="2023-05-01" max="2023-12-31" />
+					</div>
+					<div>
+						<label class="text-light" for="start">End date:</label>
+						<input class="form-control" type="date" id="start" name="trip-start" value="2023-05-31" min="2023-05-01" max="2023-12-31" />
+					</div>
+				</div>
 				<div class="div-trans d-flex justify-content-center align-items-center">
 					<table class="table container">
 						<thead class="table-light text-center">
@@ -65,6 +75,7 @@
 								<td class="text-trans">Amount</td>
 								<td class="text-trans">Description</td>
 								<td class="text-trans">Type</td>
+								<td class="text-trans">Total Balance</td>
 							</tr>
 						</thead>
 						<tbody class="text-center">
@@ -78,6 +89,7 @@
 								</template>
 								<td class="text-trans">{{dato.description}}</td>
 								<td class="text-trans">{{dato.type}}</td>
+								<td class="text-trans">{{dato.balanceTotal}}</td>
 							</tr>
 						</tbody>
 					</table>

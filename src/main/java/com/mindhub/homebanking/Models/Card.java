@@ -19,6 +19,7 @@ public class Card {
     private int cvv;
     private LocalDateTime fromDate;
     private LocalDateTime thruDate;
+    private Boolean active;
 
     @ManyToOne(fetch=FetchType.EAGER)
     private Client client;
@@ -26,7 +27,7 @@ public class Card {
     public Card() {
     }
 
-    public Card(String cardholder, CardType type, CardColor color, String number, int cvv, LocalDateTime fromDate, LocalDateTime thruDate) {
+    public Card(String cardholder, CardType type, CardColor color, String number, int cvv, LocalDateTime fromDate, LocalDateTime thruDate, Boolean active) {
         this.cardholder = cardholder;
         this.type = type;
         this.color = color;
@@ -34,6 +35,7 @@ public class Card {
         this.cvv = cvv;
         this.fromDate = fromDate;
         this.thruDate = thruDate;
+        this.active = active;
     }
 
     public long getId() {
@@ -102,5 +104,13 @@ public class Card {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }

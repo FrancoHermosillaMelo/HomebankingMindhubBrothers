@@ -98,7 +98,10 @@
 								</template>
 							</select>
 						</div>
-						<p class="text-p-loans">Remember that you will have to repay 20% more than the requested loan</p>
+						<p class="text-p-loans text-center">Remember that each loan has a different interest rate</p>
+						<p class="text-p-loans text-center">MORTAGAGE = 30%</p>
+						<p class="text-p-loans text-center">PERSON = 10%</p>
+						<p class="text-p-loans text-center">AUTOMOTIVE = 20%</p>
 						<h4 class="text-light text-center">MAX AMOUNT : U$D <span class="text-light">{{paymentsFilter.maxAmount}}</span></h4>
 						<button type="submit" class="btn btn-primary d-flex m-auto">REQUEST</button>
 					</form>
@@ -116,7 +119,7 @@
 								<tr>
 									<td class="text-light text-center">{{paymentsFilter.name}}</td>
 									<td class="text-light text-center">{{payments}}</td>
-									<td class="text-light text-center">U$D {{(amount * 1.2).toLocaleString('en-US')}}</td>
+									<td class="text-light text-center">U$D {{finalAmount.toLocaleString('en-US')}}</td>
 									<td class="text-light text-center">U$D {{quotas.toLocaleString('en-US')}}</td>
 									<!-- .toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") -->
 								</tr>

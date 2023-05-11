@@ -76,12 +76,19 @@ main {
 	max-width: fit-content;
 	margin: auto;
 }
+.icon-delete {
+	font-size: 2em;
+	cursor: pointer;
+}
 .div-main {
 	width: 30em;
 	height: 30em;
 	background-color: white;
 	border-radius: 20px;
 	box-shadow: 1px 1px 20px 5px #e7d49e;
+}
+.div-cards {
+	min-height: 25em;
 }
 .btn-account {
 	padding: 15px;
@@ -196,7 +203,7 @@ main {
 	min-height: 82.8vh;
 }
 .div-trans {
-	min-height: 38em;
+	min-height: 28em;
 }
 .text-trans {
 	font-weight: 400;
