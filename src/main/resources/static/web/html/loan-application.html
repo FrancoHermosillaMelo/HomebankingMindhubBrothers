@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>HOMEBANKING | LOANS</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp"
+			crossorigin="anonymous"
+		/>
+		<link rel="shortcut icon" href="../img/logo.png" type="image/x-icon" />
+		<link rel="stylesheet" href="../css/account.css" />
+		<link rel="stylesheet" href="../css/loans.css" />
+	</head>
+	<body class="hidden">
+		<div class="center1" id="onload">
+			<div class="lds-dual-ring"></div>
+		</div>
+		<div id="app">
+			<header>
+				<nav class="navbar navbar-expand-lg">
+					<div class="container-fluid ps-5 pe-5">
+						<img src="../img/logo.png" alt="logo" class="img-header" />
+						<span class="text-light fs-5 txt-header-span">MINDHUB BROTHERS</span>
+						<button
+							class="navbar-toggler"
+							type="button"
+							data-bs-toggle="collapse"
+							data-bs-target="#navbarNav"
+							aria-controls="navbarNav"
+							aria-expanded="false"
+							aria-label="Toggle navigation"
+						>
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+							<ul class="navbar-nav">
+								<li class="nav-item">
+									<a class="nav-link hovers text-center" aria-current="page" href="./accounts.html">MyAccounts</a>
+								</li>
+								<li class="nav-item ps-2">
+									<a class="nav-link hovers text-center" aria-current="page" href="./cards.html">MyCards</a>
+								</li>
+								<li class="nav-item ps-2">
+									<a class="nav-link hovers text-center" aria-current="page" href="./transfers.html">Transfers</a>
+								</li>
+								<li class="ps-2 exit1">
+									<a @click.prevent="logout" class="nav-link logout"><ion-icon class="exit" name="exit-outline"></ion-icon></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</nav>
+			</header>
+			<main>
+				<section class="section-loans d-flex justify-content-center align-items-center">
+					<h2 class="fs-1 text-loans text-center">Request your loan quickly and easily</h2>
+				</section>
+				<div class="pt-5 pb-5 d-flex justify-content-around align-items-center flex-wrap">
+					<form @submit.prevent="loanCreate" class="div-loans">
+						<h4 class="text-light text-center">Types of loans</h4>
+						<div class="d-flex flex-column justify-content-center align-items-center">
+							<select @Change="filterPayments" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" v-model="loanType">
+								<option selected value="" class="text-center">LOANS</option>
+								<template v-for="loan of loans">
+									<option :value="loan.name">{{loan.name.toUpperCase()}}</option>
+								</template>
+							</select>
+							<h4 class="text-light">Choose in how many installments</h4>
+							<div>
+								<select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" v-model="payments">
+									<option selected value="" class="text-center">PAYMENTS</option>
+									<template v-for="payment of paymentsFilter.payments">
+										<option :value="payment">{{payment}}</option>
+									</template>
+								</select>
+							</div>
+							<h4 class="text-light">Amount to ask</h4>
+							<div class="input-group input-group-lg div-amount">
+								<span class="input-group-text" id="inputGroup-sizing-lg"><ion-icon name="cash-outline"></ion-icon></span>
+								<input
+									@input="interests"
+									type="number"
+									class="form-control"
+									aria-label="Sizing example input"
+									aria-describedby="inputGroup-sizing-lg"
+									v-model="amount"
+								/>
+							</div>
+							<h4 class="text-light pt-3">Choose which account you want your loan to</h4>
+							<select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" v-model="account">
+								<option selected value="" class="text-center">ACCOUNTS</option>
+								<template v-for="account of accounts.account">
+									<option :value="account.number">{{account.number}}</option>
+								</template>
+							</select>
+						</div>
+						<p class="text-p-loans text-center">Remember that each loan has a different interest rate</p>
+						<h4 class="text-light text-center mb-1">INTEREST RATE : <span class="text-light">{{paymentsFilter.interests}}</span></h4>
+						<h4 class="text-light text-center mb-1">MAX AMOUNT : U$D <span class="text-light">{{paymentsFilter.maxAmount}}</span></h4>
+						<button type="submit" class="btn btn-primary d-flex m-auto">REQUEST</button>
+					</form>
+					<div class="div-form-loans table-responsive">
+						<table class="table container">
+							<thead class="table-light">
+								<tr>
+									<td class="text-trans text-center">LOAN</td>
+									<td class="text-trans text-center">PAYMENTS</td>
+									<td class="text-trans text-center">AMOUNT TO RETURN</td>
+									<td class="text-trans text-center">INSTALLMENT VALUE TO PAY</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="text-light text-center">{{paymentsFilter.name}}</td>
+									<td class="text-light text-center">{{payments}}</td>
+									<td class="text-light text-center">U$D {{finalAmount.toLocaleString('en-US')}}</td>
+									<td class="text-light text-center">U$D {{quotas.toLocaleString('en-US')}}</td>
+									<!-- .toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") -->
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</main>
+		</div>
+		<footer class="d-flex justify-content-between align-items-center flex-wrap footer">
+			<div class="d-flex justify-content-evenly ps-5 div-redes">
+				<a href="https://twitter.com/?lang=es" target="_blank"><ion-icon class="twitter pe-5" name="logo-twitter"></ion-icon></a>
+				<a
+					href="https://www.facebook.com/?stype=lo&jlou=AfffVveciDyf5KfxOjIp2ZfxOJrcoWkofVg7BatuPUqbUTBRc5Z_Zc7wD2r2LhQzpqh7D0Ey3KVkNDMMdjzbtt_Z7lFjaTbRjXujd9VM8l2Zzw&smuh=45536&lh=Ac_fNpk9LXOq1f7U"
+					target="
+                "
+					><ion-icon class="facebook" name="logo-facebook"></ion-icon
+				></a>
+			</div>
+			<h4 class="pe-5 text-footer">
+				<a class="linkedin" href="https://www.linkedin.com/in/franco-agustin-hermosilla-melo/" target="_blank"
+					>Franco Hermosilla Melo <span>Cohort 44</span></a
+				>
+			</h4>
+		</footer>
+
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+			crossorigin="anonymous"
+		></script>
+		<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+		<script src="../js/loan-application.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+		<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	</body>
+</html>

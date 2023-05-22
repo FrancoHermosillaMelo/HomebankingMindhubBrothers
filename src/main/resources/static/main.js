@@ -3,10 +3,11 @@ const {createApp} = Vue;
 createApp({
 	data() {
 		return {
-			datos: [],
-			firstname: '',
-			lastName: '',
-			email: '',
+			loans: [],
+			loanName: '',
+			loanMaxAmount: '',
+			loanPayments: '',
+			loanInterest: '',
 		};
 	},
 	created() {
@@ -15,26 +16,31 @@ createApp({
 	methods: {
 		loadData() {
 			axios
-				.get('http://localhost:8080/api/clients')
+				.get('http://localhost:8080/api/loans')
 				.then(response => {
-					this.datos = response.data;
+					this.loans = response.data;
+					console.log(this.loans);
 				})
 				.catch(error => console.log(error));
 		},
-		postClient() {
+		createLoan() {
 			axios
-				.post('http://localhost:8080/api/clients', {
-					firstName: this.firstname,
-					lastName: this.lastName,
-					email: this.email,
+				.post('http://localhost:8080/api/loans/create', {
+					name: this.loanName,
+					maxAmount: this.loanMaxAmount,
+					payments: this.loanPayments.split(', '),
+					interests: this.loanInterest,
 				})
 				.then(response => {
-					this.loadData();
+					window.location.replace = './manager.html';
 				})
-				.catch(error => console.log(error));
-		},
-		addClient() {
-			this.postClient();
+				.catch(error => {
+					Swal.fire({
+						icon: 'error',
+						text: error.response.data,
+						confirmButtonColor: '#7c601893',
+					});
+				});
 		},
 	},
 }).mount('#app');

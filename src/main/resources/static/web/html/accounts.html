@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>HOMEBANKING | ACCOUNT</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp"
+			crossorigin="anonymous"
+		/>
+		<link rel="shortcut icon" href="../img/logo.png" type="image/x-icon" />
+		<link rel="stylesheet" href="../css/account.css" />
+	</head>
+	<body class="hidden">
+		<div class="center1" id="onload">
+			<div class="lds-dual-ring"></div>
+		</div>
+		<div id="app">
+			<header>
+				<nav class="navbar navbar-expand-lg">
+					<div class="container-fluid ps-5 pe-5">
+						<img src="../img/logo.png" alt="logo" class="img-header" />
+						<span class="text-light fs-5 txt-header-span">MINDHUB BROTHERS</span>
+						<button
+							class="navbar-toggler"
+							type="button"
+							data-bs-toggle="collapse"
+							data-bs-target="#navbarNav"
+							aria-controls="navbarNav"
+							aria-expanded="false"
+							aria-label="Toggle navigation"
+						>
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+							<ul class="navbar-nav">
+								<li class="nav-item">
+									<a class="nav-link hovers active text-center" aria-current="page" href="#">MyAccounts</a>
+								</li>
+								<li class="nav-item ps-2">
+									<a class="nav-link hovers text-center" aria-current="page" href="./cards.html">MyCards</a>
+								</li>
+								<li class="nav-item ps-2">
+									<a class="nav-link hovers text-center" aria-current="page" href="./transfers.html">Transfers</a>
+								</li>
+								<template v-if="datos.email == 'hermosilla@gmail.com'">
+									<li class="nav-item ps-2">
+										<a class="nav-link hovers text-center" aria-current="page" href="../../manager.html">Manager</a>
+									</li>
+								</template>
+								<li class="ps-2 exit1">
+									<a @click.prevent="logout" class="nav-link logout"><ion-icon class="exit" name="exit-outline"></ion-icon></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</nav>
+			</header>
+			<main>
+				<div class="encabezado">
+					<h1 class="d-flex justify-content-center align-items-center">Welcome <span class="ps-3 text-welcome">{{datos.firstName}}!</span></h1>
+				</div>
+				<h2 class="text-center pt-5 text-light text-main">ACCOUNTS</h2>
+				<template v-if="accountActive.length !== 3">
+					<button @click="createAccount" type="submit" class="d-flex m-auto mt-4 btn-account">ADD ACCOUNTS</button>
+				</template>
+				<div class="pt-5 d-flex justify-content-around flex-wrap div-account gap-5">
+					<div class="div-main d-flex flex-column justify-content-evenly text-center" v-for="dato of accountActive">
+						<h3 class="h3-account text-center">{{dato.number}}</h3>
+						<div>
+							<h5 class="h5-account text-start">
+								<span class="pe-2">Creation Day</span>
+							</h5>
+							<span class="span-vue">{{dato.creationDate.slice(0,10)}} at {{dato.creationDate.slice(11,16)}}</span>
+							<h5 class="h5-account text-start"><span class="pe-2">Balance</span></h5>
+							<span class="span-vue">U$S {{dato.balance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}} </span>
+							<h5 class="h5-account text-start"><span class="pe-2">TYPE ACCOUNT</span></h5>
+							<span class="span-vue">{{dato.typeAccount}}</span>
+						</div>
+						<div>
+							<h4><span class="span">-</span>TRANSACTIONS<span class="span">-</span></h4>
+							<a :href="'./account.html?id=' + dato.id" class="a-trans"><img class="icon-debit" src="../img/transaction-icon.png" alt="" /></a>
+						</div>
+						<div>
+							<h4><span class="span">-</span>DELETE ACCOUNT<span class="span">-</span></h4>
+							<a @click="accountDelete(dato.id)" class="a-trans"><ion-icon class="icon-delete" name="trash-outline"></ion-icon></a>
+						</div>
+					</div>
+				</div>
+				<h2 class="text-main pt-3 text-light text-center">LOANS</h2>
+				<a href="./loan-application.html" class="d-flex m-auto mt-4 btn-loan justify-content-center">Request loan</a>
+				<div class="pt-5 pb-5 d-flex justify-content-center align-items-center contenedor" v-if="loans.length">
+					<table class="table container">
+						<thead class="table-light">
+							<tr>
+								<td colspan="2" class="text-trans text-center">Name</td>
+								<td colspan="2" class="text-trans text-center">Amount</td>
+								<td colspan="2" class="text-trans text-center">Amount Pay</td>
+								<td colspan="2" class="text-trans text-center">Payments</td>
+								<td colspan="2" class="text-trans text-center">Pay loan</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr v-for="dato of loans">
+								<td colspan="2" class="text-light text-center">{{dato.name.toUpperCase()}}</td>
+								<td colspan="2" class="text-light text-center">U$S {{dato.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
+								<td colspan="2" class="text-light text-center">U$S {{dato.totalAmount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
+								<td colspan="2" class="text-light text-center">{{dato.payments}}</td>
+								<td colspan="2" class="text-light text-center">
+									<ion-icon
+										@click="loanFilter(dato.id)"
+										class="icon-pay"
+										name="cash-outline"
+										data-bs-toggle="modal"
+										data-bs-target="#exampleModal"
+									></ion-icon>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="pt-5 pb-5" v-else>
+					<p class="mb-0 text-light fs-3 text-center">THIS CLIENT DOES NOT HAVE LOANS.</p>
+					<p class="text-p fs-3 text-center">DO YOU WANT TO ORDER ONE?</p>
+				</div>
+			</main>
+			<footer class="d-flex justify-content-between align-items-center flex-wrap footer">
+				<div class="d-flex justify-content-evenly ps-5 div-redes">
+					<a href="https://twitter.com/?lang=es" target="_blank"><ion-icon class="twitter pe-5" name="logo-twitter"></ion-icon></a>
+					<a
+						href="https://www.facebook.com/?stype=lo&jlou=AfffVveciDyf5KfxOjIp2ZfxOJrcoWkofVg7BatuPUqbUTBRc5Z_Zc7wD2r2LhQzpqh7D0Ey3KVkNDMMdjzbtt_Z7lFjaTbRjXujd9VM8l2Zzw&smuh=45536&lh=Ac_fNpk9LXOq1f7U"
+						target="
+					"
+						><ion-icon class="facebook" name="logo-facebook"></ion-icon
+					></a>
+				</div>
+				<h4 class="pe-5 text-footer">
+					<a class="linkedin" href="https://www.linkedin.com/in/franco-agustin-hermosilla-melo/" target="_blank"
+						>Franco Hermosilla Melo <span>Cohort 44</span></a
+					>
+				</h4>
+			</footer>
+
+			<!-- MODAL -->
+			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-header justify-content-center">
+							<h2 class="modal-title fs-4 justify-content-center" id="exampleModalLabel">PAY LOAN</h2>
+						</div>
+						<div class="modal-body">
+							<form @submit.prevent="loanPay">
+								<div class="div-check mt-4 mb-4 m-auto">
+									<div class="form-check m-auto">
+										<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" :value="quotas" v-model="amount" />
+										<label class="form-check-label" for="flexRadioDefault1">
+											PAY QUOTA : U$D {{quotas.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}
+										</label>
+									</div>
+									<div class="form-check m-auto">
+										<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" :value="payTotal" v-model="amount" />
+										<label class="form-check-label" for="flexRadioDefault2">
+											PAY TOTAL LOAN : U$D {{payTotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}
+										</label>
+									</div>
+								</div>
+								<h2 class="text-center text-dark fs-4">ACCOUNT</h2>
+
+								<select class="form-select form-select-sm mb-3 m-auto" aria-label=".form-select-sm example" v-model="account">
+									<option selected value="">Select Account</option>
+									<template v-for="account of accountActive">
+										<option :value="account.number">{{account.number}}</option>
+									</template>
+								</select>
+								<div class="d-flex justify-content-end gap-2">
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CLOSE</button>
+									<button type="submit" class="btn btn-primary">PAY</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+			crossorigin="anonymous"
+		></script>
+		<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+		<script src="../js/accounts.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+		<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	</body>
+</html>
