@@ -22,7 +22,8 @@ createApp({
 				.then(response => {
 					this.account = response.data;
 					this.transactions = this.account.transactionDTOS;
-					this.transactionOrder = this.transactions.sort((a, b) => b.id - a.id);
+					this.transactionOrder = this.transactions.sort((a, b) => a.id - b.id);
+					console.log(this.transactionOrder);
 					this.dateStart = this.transactionOrder[this.transactionOrder.length - 1].date.split('T')[0];
 					this.dateEnd = this.transactionOrder[0].date.split('T')[0];
 				})
@@ -92,7 +93,7 @@ createApp({
 					},
 				})
 				.then(response => {
-					this.transactionOrder = response.data;
+					this.transactionOrder = this.transactions.sort((a, b) => b.id - a.id);
 				})
 				.catch(error => console.log(error));
 		},

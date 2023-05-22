@@ -61,14 +61,14 @@ public class ClientController {
 
         if (firstName.isBlank()) {
             return new ResponseEntity<>("Your name is missing.", HttpStatus.FORBIDDEN);
-        } else if (!firstName.matches("^[a-zA-Z]*$")) {
+        } else if (!firstName.matches("^[a-z A-Z]*$")) {
             return new ResponseEntity<>("Please enter a valid FirstName. Only letters are allowed.", HttpStatus.FORBIDDEN);
         }
 
         if (lastName.isBlank()) {
             return new ResponseEntity<>("Your last name is missing.", HttpStatus.FORBIDDEN);
         }
-        else if (!lastName.matches("^[a-zA-Z]*$")) {
+        else if (!lastName.matches("^[a-z A-Z]*$")) {
             return new ResponseEntity<>("Please enter a valid LastName. Only letters are allowed.", HttpStatus.FORBIDDEN);
         }
 
