@@ -19,15 +19,16 @@ public class HomebankingApplication {
 		SpringApplication.run(HomebankingApplication.class, args);
 	}
 
-	LocalDateTime day = LocalDateTime.now();
-	List<Integer> mortgage = List.of(12, 24, 36, 48, 60);
-	List<Integer> personal = List.of(6, 12, 24);
-	List<Integer> automotive = List.of(6, 12, 24, 36);
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	@Bean
 	public CommandLineRunner initData(ClientRepository  repository, AccountRepository Repository, TransactionRepository repository3, LoanRepository RepositoryLoan, ClientLoanRepository RepositoryClientLoan, CardRepository RepositoryCard) {
 		return (args) -> {
+			LocalDateTime day = LocalDateTime.now();
+			List<Integer> mortgage = List.of(12, 24, 36, 48, 60);
+			List<Integer> personal = List.of(6, 12, 24);
+			List<Integer> automotive = List.of(6, 12, 24, 36);
+
 			Client client1 = new Client("Melba", "Morel", "melba@mindhub.com", passwordEncoder.encode("asd12345"));
 			Client client2 = new Client("Franco", "Hermosilla", "francohermosilla@gmail.com", passwordEncoder.encode("asd54321"));
 			repository.save(client1);
