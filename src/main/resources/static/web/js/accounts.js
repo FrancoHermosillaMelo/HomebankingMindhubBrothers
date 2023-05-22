@@ -119,11 +119,8 @@ createApp({
 		},
 		loanFilter(id) {
 			this.loanID = this.loans.filter(loan => loan.id == id)[0];
-			console.log(this.loanID);
 			this.quotas = this.loanID.totalAmount / this.loanID.payments;
-			console.log(this.quotas);
 			this.payTotal = this.loanID.totalAmount;
-			console.log(this.payTotal);
 		},
 		loanPay() {
 			Swal.fire({

@@ -81,7 +81,7 @@
 						</thead>
 						<tbody class="text-center">
 							{{filterDate}}
-							<tr :class="dato.type" v-for="dato of transactionOrder">
+							<tr :class="dato.type" v-for="dato of transactionOrderFilter">
 								<td colspan="2" class="text-trans">{{dato.date.slice(0,10)}} | {{dato.date.slice(11,16)}}</td>
 								<template v-if="dato.type == 'CREDIT'">
 									<td colspan="2" class="text-trans">+${{dato.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
