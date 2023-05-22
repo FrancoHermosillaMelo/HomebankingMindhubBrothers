@@ -16,7 +16,7 @@ createApp({
 	methods: {
 		loadData() {
 			axios
-				.get('http://localhost:8080/api/loans')
+				.get('/api/loans')
 				.then(response => {
 					this.loans = response.data;
 					console.log(this.loans);
@@ -25,7 +25,7 @@ createApp({
 		},
 		createLoan() {
 			axios
-				.post('http://localhost:8080/api/loans/create', {
+				.post('/api/loans/create', {
 					name: this.loanName,
 					maxAmount: this.loanMaxAmount,
 					payments: this.loanPayments.split(', '),

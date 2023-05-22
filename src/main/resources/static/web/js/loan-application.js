@@ -22,7 +22,7 @@ createApp({
 	methods: {
 		loanData() {
 			axios
-				.get('http://localhost:8080/api/loans')
+				.get('/api/loans')
 				.then(response => {
 					this.loans = response.data;
 				})
@@ -30,7 +30,7 @@ createApp({
 		},
 		accountsData() {
 			axios
-				.get('http://localhost:8080/api/clients/current')
+				.get('/api/clients/current')
 				.then(response => {
 					this.accounts = response.data;
 					console.log(this.accounts);

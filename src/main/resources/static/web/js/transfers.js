@@ -19,7 +19,7 @@ createApp({
 	methods: {
 		transaction() {
 			axios
-				.get('http://localhost:8080/api/clients/current')
+				.get('/api/clients/current')
 				.then(response => {
 					this.datos = response.data;
 					this.account = this.datos.account;

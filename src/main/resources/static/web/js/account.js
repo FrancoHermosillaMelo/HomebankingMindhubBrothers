@@ -18,7 +18,7 @@ createApp({
 	methods: {
 		loadData() {
 			axios
-				.get('http://localhost:8080/api/clients/current/accounts/' + this.id)
+				.get('/api/clients/current/accounts/' + this.id)
 				.then(response => {
 					this.account = response.data;
 					this.transactions = this.account.transactionDTOS;
@@ -62,10 +62,7 @@ createApp({
 				showLoaderOnConfirm: true,
 				preConfirm: pdf => {
 					return axios
-						.post(
-							'http://localhost:8080/api/accounts/transactions/pdf',
-							'id=' + this.id + '&startDate=' + this.dateStart + '&endDate=' + this.dateEnd
-						)
+						.post('/api/accounts/transactions/pdf', 'id=' + this.id + '&startDate=' + this.dateStart + '&endDate=' + this.dateEnd)
 						.then(response => {
 							Swal.fire({
 								icon: 'success',
@@ -87,7 +84,7 @@ createApp({
 	computed: {
 		filterDate() {
 			axios
-				.get('http://localhost:8080/api/accounts/transactions/date', {
+				.get('/api/accounts/transactions/date', {
 					params: {
 						id: this.id,
 						startDate: this.dateStart,
