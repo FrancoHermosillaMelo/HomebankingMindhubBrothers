@@ -80,7 +80,7 @@
 					<template v-if="claseagregada">
 						<form @submit.prevent="addTransaction" class="align-items-center d-flex justify-content-center flex-column">
 							<div class="d-flex flex-column gap-2">
-								<select class="form-select" multiple aria-label="multiple select example" v-model="account1">
+								<select class="form-select" multiple aria-label="multiple select example" v-model="account1" required>
 									<option class="text-center opt" disabled value="">SEND</option>
 									<template v-for="accounts of accountOrder">
 										<option class="text-center opt" :value="accounts.number">
@@ -88,7 +88,7 @@
 										</option>
 									</template>
 								</select>
-								<select class="form-select" multiple aria-label="multiple select example" v-model="account2">
+								<select class="form-select" multiple aria-label="multiple select example" v-model="account2" required>
 									<option class="text-center opt" disabled value="">RECEIVES</option>
 									<template v-for="accounts of accountOrder">
 										<option :disabled="account1 == accounts.number ? true : false" class="text-center opt" :value="accounts.number">
@@ -112,7 +112,7 @@
 					</template>
 					<template v-else>
 						<form @submit.prevent="addTransaction" class="align-items-center d-flex justify-content-center flex-column">
-							<select class="form-select" multiple aria-label="multiple select example" v-model="account1">
+							<select class="form-select" multiple aria-label="multiple select example" v-model="account1" required>
 								<option class="text-center opt" disabled value="">YOUR ACCOUNTS</option>
 								<template v-for="accounts of accountOrder">
 									<option class="text-center opt" :value="accounts.number">

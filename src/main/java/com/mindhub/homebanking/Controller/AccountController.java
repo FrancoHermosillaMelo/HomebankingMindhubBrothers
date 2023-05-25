@@ -21,6 +21,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+
 @RestController
 public class AccountController {
 //        @Autowired
@@ -54,10 +56,19 @@ public class AccountController {
             return accountService.getAccountAuthentication(authentication);
         }
         @GetMapping("/api/clients/current/accounts/{id}")
-        public AccountDTO getAccount(@PathVariable Long id){
-            return accountService.getAccountID(id);
-    }
-//    clientRepository.findByEmail(authentication.getName()).getAccounts().size()
+        public ResponseEntity<Object> getAccount(@PathVariable Long id, Authentication authentication){
+
+            ClientDTO client = clientService.getClientAuthentication(authentication);
+            Account account = accountService.findById(id);
+            AccountDTO accountDTO = accountService.getAccountID(id);
+
+            if ( !client.getAccount().stream().filter( accountCLient -> accountCLient.getId() == account.getId() ).collect(toList()).isEmpty() ){
+                return new ResponseEntity<>(accountDTO, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("This account is not yours", HttpStatus.FORBIDDEN);
+            }
+        }
+
 
     @PostMapping("/api/clients/current/accounts")
 
@@ -72,7 +83,7 @@ public class AccountController {
                     return new ResponseEntity<>("Client already has the maximum number of accounts allowed.", HttpStatus.FORBIDDEN);
                 }
 
-                int activeAccounts = client.getAccounts().stream().filter(Account::getActiveAccount).collect(Collectors.toList()).size();
+                int activeAccounts = client.getAccounts().stream().filter(Account::getActiveAccount).collect(toList()).size();
 
                 if (activeAccounts >= 3) {
                     return new ResponseEntity<>("Client already has the maximum number of active accounts allowed.", HttpStatus.FORBIDDEN);

@@ -22,25 +22,12 @@ import java.util.stream.Collectors;
 @RestController
 public class ClientController {
 
-//    @Autowired
-//    private ClientRepository clientRepository;
-//    @Autowired
-//    private AccountRepository accountRepository;
     @Autowired
     private ClientService clientService;
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
     private AccountService accountService;
-
-//    private String randomNumber(){
-//        String randomNumber;
-//        do {
-//            int number = (int) (Math.random() * 899999 + 100000);
-//            randomNumber = "VIN-" + number;
-//        } while (accountService.findByNumber(randomNumber) != null);
-//        return randomNumber;
-//    }
 
     @GetMapping("/api/clients")
     public List<ClientDTO> getClients() {
@@ -61,14 +48,14 @@ public class ClientController {
 
         if (firstName.isBlank()) {
             return new ResponseEntity<>("Your name is missing.", HttpStatus.FORBIDDEN);
-        } else if (!firstName.matches("^[a-zA-Z]*$")) {
+        } else if (!firstName.matches("^[a-z A-Z]*$")) {
             return new ResponseEntity<>("Please enter a valid FirstName. Only letters are allowed.", HttpStatus.FORBIDDEN);
         }
 
         if (lastName.isBlank()) {
             return new ResponseEntity<>("Your last name is missing.", HttpStatus.FORBIDDEN);
         }
-        else if (!lastName.matches("^[a-zA-Z]*$")) {
+        else if (!lastName.matches("^[a-z A-Z]*$")) {
             return new ResponseEntity<>("Please enter a valid LastName. Only letters are allowed.", HttpStatus.FORBIDDEN);
         }
 
