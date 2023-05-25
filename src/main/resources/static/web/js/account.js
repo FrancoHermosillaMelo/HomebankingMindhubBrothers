@@ -6,6 +6,7 @@ createApp({
 			account: [],
 			transactions: [],
 			transactionOrder: [],
+			transactionOrderFilter: [],
 			transactionDate: [],
 			dateStart: '0000-00-00',
 			dateEnd: '0000-00-00',
@@ -92,7 +93,7 @@ createApp({
 					},
 				})
 				.then(response => {
-					this.transactionOrder = response.data;
+					this.transactionOrderFilter = this.transactions.sort((a, b) => b.id - a.id);
 				})
 				.catch(error => console.log(error));
 		},
